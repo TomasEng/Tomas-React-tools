@@ -2,6 +2,7 @@
   "name": "tomas-react-tools",
   "description": "Tomas' React tools",
   "version": "0.1.0",
+  "homepage": "http://TomasEng.github.io/Tomas-React-tools",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
@@ -22,7 +23,9 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "predeploy": "npm run build-storybook",
+    "deploy-storybook": "gh-pages -d storybook-static"
   },
   "eslintConfig": {
     "extends": [
@@ -62,6 +65,7 @@
     "@storybook/react-webpack5": "^7.0.8",
     "@storybook/testing-library": "^0.0.14-next.2",
     "babel-plugin-named-exports-order": "^0.0.2",
+    "gh-pages": "^5.0.0",
     "prop-types": "^15.8.1",
     "storybook": "^7.0.8",
     "webpack": "^5.82.0"
