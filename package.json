@@ -1,7 +1,7 @@
 {
   "name": "tomas-react-tools",
   "description": "Tomas' React tools",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "homepage": "http://TomasEng.github.io/Tomas-React-tools",
   "dependencies": {
     "@digdir/design-system-react": "^0.11.3",
