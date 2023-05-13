@@ -1,1 +1,2 @@
-export { UnitInput } from './UnitInput';
+export {UnitInput} from './UnitInput';
+export type {UnitInputProps} from './UnitInput';

@@ -1,0 +1,13 @@
+.root {
+    display: inline-flex;
+    flex-direction: column;
+    width: 144px;
+}
+
+.unitSelector {
+    flex: 1;
+}
+
+.prefixSelector {
+    flex: 1;
+}

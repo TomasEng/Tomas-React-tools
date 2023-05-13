@@ -1,19 +1,17 @@
 import type {Meta, StoryObj} from '@storybook/react';
-import {UnitInput} from './UnitInput';
+import {UnitSelector} from './UnitSelector';
 import {Unit, UnitName} from 'enheter';
 
 const meta = {
-  title: 'Components/UnitInput',
-  component: UnitInput,
+  title: 'Components/UnitSelector',
+  component: UnitSelector,
   // This component will have an automatically generated Autodocs entry: https://storybook.js.org/docs/react/writing-docs/autodocs
   tags: ['autodocs'],
   parameters: {
     // More on how to position stories at: https://storybook.js.org/docs/react/configure/story-layout
     layout: 'centered',
   },
-} satisfies Meta<typeof UnitInput>;
-
-export default meta;
+} satisfies Meta<typeof UnitSelector>;
 type Story = StoryObj<typeof meta>;
 
 export const Example: Story = {
@@ -46,3 +44,5 @@ export const Example: Story = {
     },
   },
 };
+
+export default meta;

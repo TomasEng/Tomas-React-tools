@@ -1,0 +1,25 @@
+import {Prefix} from 'enheter/lib/Prefix';
+
+export const unitPrefixes: Prefix[] = [
+  'yotta',
+  'zetta',
+  'exa',
+  'peta',
+  'tera',
+  'giga',
+  'mega',
+  'kilo',
+  'hecto',
+  'deca',
+  '',
+  'deci',
+  'centi',
+  'milli',
+  'micro',
+  'nano',
+  'pico',
+  'femto',
+  'atto',
+  'zepto',
+  'yocto',
+];
