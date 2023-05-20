@@ -4,11 +4,12 @@ import style from './UnitSelector.module.css';
 import {Select, SingleSelectOption} from '@digdir/design-system-react';
 import {unitPrefixes} from '../../data/unitPrefixes';
 import {prefixAsString, UnitSelectorActionType, unitSelectorReducer, UnitSelectorState} from './UnitSelectorReducer';
+import {UnitTextFn} from '../../types';
 
 export interface UnitSelectorProps {
   dimension: DimensionName;
   onChange?: (unit: Unit) => void;
-  textFn: (unit: Unit) => string;
+  textFn: UnitTextFn;
 }
 
 export const UnitSelector = ({
