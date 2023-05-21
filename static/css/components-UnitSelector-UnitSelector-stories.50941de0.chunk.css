@@ -2,6 +2,7 @@
     display: inline-flex;
     flex-direction: column;
     width: 144px;
+    gap: 1rem;
 }
 
 .UnitSelector_unitSelector__q2QvD {
@@ -12,4 +13,4 @@
     flex: 1 1;
 }
 
-/*# sourceMappingURL=components-UnitSelector-UnitSelector-stories.1e06df4a.chunk.css.map*/
+/*# sourceMappingURL=components-UnitSelector-UnitSelector-stories.50941de0.chunk.css.map*/

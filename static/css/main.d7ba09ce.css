@@ -418,16 +418,8 @@
   --brand-default-third-800: #156aac;
 }
 
-.UnitInput_unitInput__rdQhG {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    width: 100%;
-    gap: 1rem;
+body {
+    font-family: Inter, Arial, Helvetica, sans-serif;
 }
 
-.UnitInput_unitInput__rdQhG > * {
-    flex: 1 1;
-}
-
-/*# sourceMappingURL=components-UnitInput-UnitInput-stories.ff3de561.chunk.css.map*/
+/*# sourceMappingURL=main.d7ba09ce.css.map*/
