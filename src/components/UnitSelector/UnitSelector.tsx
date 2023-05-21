@@ -6,17 +6,19 @@ import {unitPrefixes} from '../../data/unitPrefixes';
 import {prefixAsString, UnitSelectorActionType, unitSelectorReducer, UnitSelectorState} from './UnitSelectorReducer';
 import {UnitTextFn} from '../../types';
 
-export interface UnitSelectorProps {
-  dimension: DimensionName;
+export interface UnitSelectorProps<D extends DimensionName> {
+  dimension: D;
   onChange?: (unit: Unit) => void;
   textFn: UnitTextFn;
+  selectedUnit?: Unit;
 }
 
-export const UnitSelector = ({
-                               dimension,
-                               onChange,
-                               textFn = (unit: Unit) => unit.key || '',
-                             }: UnitSelectorProps) => {
+export const UnitSelector = <D extends DimensionName>({
+                                                        dimension,
+                                                        onChange,
+                                                        textFn = (unit: Unit) => unit.key || '',
+                                                        selectedUnit,
+                                                      }: UnitSelectorProps<D>) => {
 
   const {units} = allUnits[dimension];
 
@@ -24,17 +26,17 @@ export const UnitSelector = ({
 
   const [state, dispatch] = useReducer(
     unitSelectorReducer(reducerCallback),
-    {unit: Object.values(units)[0].baseUnit}
+    {unit: selectedUnit ?? Object.values(units)[0].baseUnit}
   );
 
   useEffect(() => {
     dispatch({
-      type: UnitSelectorActionType.INITIALIZE_UNIT,
-      dimension,
+      type: UnitSelectorActionType.SET_UNIT,
+      unit: selectedUnit ?? Object.values(units)[0].baseUnit,
     });
-  }, [dimension, units]);
+  }, [dimension, units, selectedUnit]);
 
-  const setUnit = (unitKey: string) => dispatch({type: UnitSelectorActionType.SET_UNIT, unitKey});
+  const setUnit = (unitKey: string) => dispatch({type: UnitSelectorActionType.SET_UNIT_KEY, unitKey});
   const setPrefix = (prefix: string) => dispatch({type: UnitSelectorActionType.SET_PREFIX, prefix});
 
   const prefixlessUnits = Object.values(units).filter((unit) => !unit.prefix);

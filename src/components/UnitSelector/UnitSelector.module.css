@@ -2,6 +2,7 @@
     display: inline-flex;
     flex-direction: column;
     width: 144px;
+    gap: 1rem;
 }
 
 .unitSelector {

@@ -1,4 +1,4 @@
-import {allUnits, DimensionName, findUnitsByDimension, Prefix, Unit} from 'enheter';
+import {findUnitsByDimension, Prefix, Unit} from 'enheter';
 
 export interface UnitSelectorState {
   unit: Unit;
@@ -6,12 +6,17 @@ export interface UnitSelectorState {
 
 export enum UnitSelectorActionType {
   SET_UNIT = 'SET_UNIT',
+  SET_UNIT_KEY = 'SET_UNIT_KEY',
   SET_PREFIX = 'SET_PREFIX',
-  INITIALIZE_UNIT = 'INITIALIZE_UNIT',
 }
 
 interface SetUnitAction {
   type: UnitSelectorActionType.SET_UNIT;
+  unit: Unit;
+}
+
+interface SetUnitKeyAction {
+  type: UnitSelectorActionType.SET_UNIT_KEY;
   unitKey: string;
 }
 
@@ -20,14 +25,13 @@ interface SetPrefixAction {
   prefix: string;
 }
 
-interface InitializeUnitAction {
-  type: UnitSelectorActionType.INITIALIZE_UNIT;
-  dimension: DimensionName;
-}
+export type UnitSelectorAction = SetUnitAction | SetUnitKeyAction | SetPrefixAction;
 
-export type UnitSelectorAction = SetUnitAction | SetPrefixAction | InitializeUnitAction;
+const setUnit = (state: UnitSelectorState, action: SetUnitAction): UnitSelectorState => ({
+  unit: action.unit,
+});
 
-const setUnit = (state: UnitSelectorState, action: SetUnitAction): UnitSelectorState => {
+const setUnitKey = (state: UnitSelectorState, action: SetUnitKeyAction): UnitSelectorState => {
   const {prefix, dimension} = state.unit;
   const unit = findUnitsByDimension(dimension)[action.unitKey].withPrefix(prefix);
   return {unit};
@@ -37,11 +41,6 @@ const setPrefix = (state: UnitSelectorState, action: SetPrefixAction): UnitSelec
   unit: state.unit.withPrefix(action.prefix || null as Prefix),
 });
 
-const setUnitWithNoPrefix = (state: UnitSelectorState, action: InitializeUnitAction): UnitSelectorState => {
-  const {units} = allUnits[action.dimension];
-  return {unit: Object.values(units)[0].baseUnit};
-}
-
 export const unitSelectorReducer = (callback: (state: UnitSelectorState) => void) =>
   (state: UnitSelectorState, action: UnitSelectorAction): UnitSelectorState => {
     let newState;
@@ -49,11 +48,11 @@ export const unitSelectorReducer = (callback: (state: UnitSelectorState) => void
       case UnitSelectorActionType.SET_UNIT:
         newState = setUnit(state, action);
         break;
+      case UnitSelectorActionType.SET_UNIT_KEY:
+        newState = setUnitKey(state, action);
+        break;
       case UnitSelectorActionType.SET_PREFIX:
         newState = setPrefix(state, action);
-        break;
-      case UnitSelectorActionType.INITIALIZE_UNIT:
-        newState = setUnitWithNoPrefix(state, action);
         break;
       default:
         newState = state;
