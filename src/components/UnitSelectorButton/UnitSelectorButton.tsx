@@ -17,7 +17,7 @@ export const UnitSelectorButton = <D extends DimensionName>({
   const [selectedUnit, setSelectedUnit] = useState<Unit>(defaultUnit);
   return (
     <Popover
-      trigger={<Button>{selectedUnit.symbol}</Button>}
+      trigger={<Button title={textFn(selectedUnit)}>{selectedUnit.symbol}</Button>}
       placement='top'
     >
       <UnitSelector<D>

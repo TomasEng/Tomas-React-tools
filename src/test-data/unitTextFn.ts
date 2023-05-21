@@ -1,4 +1,5 @@
 import {Dimension, DimensionName, findDimensionName, Unit, UnitName} from 'enheter';
+import {capitalize} from '../utils/stringUtils';
 
 const unitTexts: {
   [dimensionName in DimensionName]: {
@@ -175,7 +176,7 @@ export const unitTextFn = <D extends Dimension>(unit: Unit<D>): string => {
     if (dimension === dimensionName) {
       for (const [key, value] of Object.entries(units)) {
         if (unit.key === key) {
-          return value[0];
+          return capitalize((unit.prefix || '') + value[0]);
         }
       }
     }
