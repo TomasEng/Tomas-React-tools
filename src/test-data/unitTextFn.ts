@@ -1,4 +1,4 @@
-import {Dimension, DimensionName, findDimensionName, Unit, UnitName} from 'enheter';
+import {Dimension, DimensionName, findDimensionName, findUnitName, Unit, UnitName} from 'enheter';
 import {capitalize} from '../utils/stringUtils';
 
 const unitTexts: {
@@ -172,14 +172,12 @@ const unitTexts: {
 
 export const unitTextFn = <D extends Dimension>(unit: Unit<D>): string => {
   const dimensionName = findDimensionName(unit.dimension);
-  for (const [dimension, units] of Object.entries(unitTexts)) {
-    if (dimension === dimensionName) {
-      for (const [key, value] of Object.entries(units)) {
-        if (unit.key === key) {
-          return capitalize((unit.prefix || '') + value[0]);
-        }
-      }
-    }
-  }
-  return '';
+  const {prefix} = unit;
+  const prefixlessUnit = unit.withPrefix(null);
+  const prefixlessUnitName = findUnitName(prefixlessUnit);
+  if (dimensionName && prefixlessUnitName && prefixlessUnitName in unitTexts[dimensionName]) {
+    // @ts-ignore
+    const prefixlessName = unitTexts[dimensionName][prefixlessUnitName][0];
+    return capitalize((prefix || '') + prefixlessName);
+  } else return '';
 }

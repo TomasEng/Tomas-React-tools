@@ -4,15 +4,15 @@ import {UnitSelector} from '../UnitSelector';
 import {UnitTextFn} from '../../types';
 import {allUnits, DimensionName, Unit} from 'enheter';
 
-export interface UnitSelectorButtonProps<D extends DimensionName> {
-  dimension: D;
+export interface UnitSelectorButtonProps {
+  dimension: DimensionName;
   textFn: UnitTextFn;
 }
 
-export const UnitSelectorButton = <D extends DimensionName>({
-                                                              dimension,
-                                                              textFn
-                                                            }: UnitSelectorButtonProps<D>) => {
+export const UnitSelectorButton = ({
+                                     dimension,
+                                     textFn
+                                   }: UnitSelectorButtonProps) => {
   const defaultUnit = useCallback(() => Object.values(allUnits[dimension].units)[0].baseUnit, [dimension]);
   const [selectedUnit, setSelectedUnit] = useState<Unit>(defaultUnit);
   return (
@@ -20,7 +20,7 @@ export const UnitSelectorButton = <D extends DimensionName>({
       trigger={<Button title={textFn(selectedUnit)}>{selectedUnit.symbol}</Button>}
       placement='top'
     >
-      <UnitSelector<D>
+      <UnitSelector
         dimension={dimension}
         onChange={setSelectedUnit}
         selectedUnit={selectedUnit}

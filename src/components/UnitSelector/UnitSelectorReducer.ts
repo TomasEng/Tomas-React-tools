@@ -38,7 +38,7 @@ const setUnitKey = (state: UnitSelectorState, action: SetUnitKeyAction): UnitSel
 };
 
 const setPrefix = (state: UnitSelectorState, action: SetPrefixAction): UnitSelectorState => ({
-  unit: state.unit.withPrefix(action.prefix || null as Prefix),
+  unit: state.unit.withPrefix(action.prefix || null as Prefix, state.unit.key),
 });
 
 export const unitSelectorReducer = (callback: (state: UnitSelectorState) => void) =>

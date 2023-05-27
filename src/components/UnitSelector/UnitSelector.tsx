@@ -1,24 +1,34 @@
-import React, {useEffect, useReducer} from 'react';
-import {allUnits, DimensionName, Unit} from 'enheter';
+import React, {useReducer} from 'react';
+import {allUnits, DimensionName, findDimensionName, findUnitName, Unit} from 'enheter';
 import style from './UnitSelector.module.css';
 import {Select, SingleSelectOption} from '@digdir/design-system-react';
 import {unitPrefixes} from '../../data/unitPrefixes';
 import {prefixAsString, UnitSelectorActionType, unitSelectorReducer, UnitSelectorState} from './UnitSelectorReducer';
 import {UnitTextFn} from '../../types';
+import {useUpdate} from '../../hooks/useUpdate';
 
-export interface UnitSelectorProps<D extends DimensionName> {
-  dimension: D;
+export interface UnitSelectorProps {
+  dimension: DimensionName;
   onChange?: (unit: Unit) => void;
   textFn: UnitTextFn;
   selectedUnit?: Unit;
 }
 
-export const UnitSelector = <D extends DimensionName>({
-                                                        dimension,
-                                                        onChange,
-                                                        textFn = (unit: Unit) => unit.key || '',
-                                                        selectedUnit,
-                                                      }: UnitSelectorProps<D>) => {
+const initializeUnit = (dimension: DimensionName, unit?: Unit) => {
+  const validUnits = allUnits[dimension].units;
+  const validUnitsArray = Object.values(validUnits);
+  if (!validUnitsArray.length) throw new Error(`No valid units for dimension ${dimension}`);
+  const defaultUnit = validUnitsArray[0].baseUnit;
+  if (!unit || findDimensionName(unit.dimension) !== dimension) return defaultUnit;
+  else return unit;
+}
+
+export const UnitSelector = ({
+                               dimension,
+                               onChange,
+                               textFn = (unit: Unit) => unit.key || '',
+                               selectedUnit,
+                             }: UnitSelectorProps) => {
 
   const {units} = allUnits[dimension];
 
@@ -26,13 +36,13 @@ export const UnitSelector = <D extends DimensionName>({
 
   const [state, dispatch] = useReducer(
     unitSelectorReducer(reducerCallback),
-    {unit: selectedUnit ?? Object.values(units)[0].baseUnit}
+    {unit: initializeUnit(dimension, selectedUnit)}
   );
 
-  useEffect(() => {
+  useUpdate(() => {
     dispatch({
       type: UnitSelectorActionType.SET_UNIT,
-      unit: selectedUnit ?? Object.values(units)[0].baseUnit,
+      unit: initializeUnit(dimension, selectedUnit),
     });
   }, [dimension, units, selectedUnit]);
 
@@ -42,7 +52,7 @@ export const UnitSelector = <D extends DimensionName>({
   const prefixlessUnits = Object.values(units).filter((unit) => !unit.prefix);
   const options: SingleSelectOption[] = prefixlessUnits.map((unit) => ({
     label: textFn(unit),
-    value: unit.key,
+    value: findUnitName(unit) ?? '',
   }));
 
   const prefixOptions: SingleSelectOption[] = unitPrefixes.map((prefix) => ({
@@ -64,7 +74,7 @@ export const UnitSelector = <D extends DimensionName>({
         label='Unit'
         options={options}
         onChange={setUnit}
-        value={state.unit.key}
+        value={findUnitName(state.unit.withPrefix(null))}
       />
     </span>
   </span>;
