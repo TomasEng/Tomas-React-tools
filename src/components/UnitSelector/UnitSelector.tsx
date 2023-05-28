@@ -1,33 +1,29 @@
 import React, {useReducer} from 'react';
-import {allUnits, DimensionName, findDimensionName, findUnitName, Unit} from 'enheter';
+import {allUnits, DimensionName, findUnitName, Unit} from 'enheter';
 import style from './UnitSelector.module.css';
 import {Select, SingleSelectOption} from '@digdir/design-system-react';
 import {unitPrefixes} from '../../data/unitPrefixes';
 import {prefixAsString, UnitSelectorActionType, unitSelectorReducer, UnitSelectorState} from './UnitSelectorReducer';
 import {UnitTextFn} from '../../types';
 import {useUpdate} from '../../hooks/useUpdate';
+import {initializeUnit} from '../../utils/unitUtils';
 
 export interface UnitSelectorProps {
   dimension: DimensionName;
   onChange?: (unit: Unit) => void;
-  textFn: UnitTextFn;
+  prefixText?: string;
   selectedUnit?: Unit;
-}
-
-const initializeUnit = (dimension: DimensionName, unit?: Unit) => {
-  const validUnits = allUnits[dimension].units;
-  const validUnitsArray = Object.values(validUnits);
-  if (!validUnitsArray.length) throw new Error(`No valid units for dimension ${dimension}`);
-  const defaultUnit = validUnitsArray[0].baseUnit;
-  if (!unit || findDimensionName(unit.dimension) !== dimension) return defaultUnit;
-  else return unit;
+  textFn: UnitTextFn;
+  unitText?: string;
 }
 
 export const UnitSelector = ({
                                dimension,
                                onChange,
-                               textFn = (unit: Unit) => unit.key || '',
+                               prefixText = 'Prefix',
                                selectedUnit,
+                               textFn = (unit: Unit) => unit.key || '',
+                               unitText = 'Unit',
                              }: UnitSelectorProps) => {
 
   const {units} = allUnits[dimension];
@@ -44,7 +40,7 @@ export const UnitSelector = ({
       type: UnitSelectorActionType.SET_UNIT,
       unit: initializeUnit(dimension, selectedUnit),
     });
-  }, [dimension, units, selectedUnit]);
+  }, [dimension, selectedUnit]);
 
   const setUnit = (unitKey: string) => dispatch({type: UnitSelectorActionType.SET_UNIT_KEY, unitKey});
   const setPrefix = (prefix: string) => dispatch({type: UnitSelectorActionType.SET_PREFIX, prefix});
@@ -63,7 +59,7 @@ export const UnitSelector = ({
   return <span className={style.root}>
     <span className={style.prefixSelector}>
       <Select
-        label='Prefix'
+        label={prefixText}
         options={prefixOptions}
         onChange={setPrefix}
         value={prefixAsString(state.unit.prefix)}
@@ -71,7 +67,7 @@ export const UnitSelector = ({
     </span>
     <span className={style.unitSelector}>
       <Select
-        label='Unit'
+        label={unitText}
         options={options}
         onChange={setUnit}
         value={findUnitName(state.unit.withPrefix(null))}

@@ -18,6 +18,8 @@ export const Example: Story = {
   args: {
     dimension: 'length',
     textFn: unitTextFn,
+    prefixText: 'Prefix',
+    unitText: 'Unit',
   },
 };
 

@@ -1,27 +1,25 @@
 import React, {useEffect, useState} from 'react';
-import {Select, SingleSelectOption, TextField} from '@digdir/design-system-react';
-import type {DimensionName} from 'enheter';
-import {allUnits} from 'enheter';
+import {TextField} from '@digdir/design-system-react';
+import {Unit} from 'enheter';
 import '@altinn/figma-design-tokens/dist/tokens.css';
 import style from './UnitInput.module.css';
-import {UnitTextFn} from '../../types';
+import {UnitSelectorButton, UnitSelectorButtonProps} from '../UnitSelectorButton';
+import {initializeUnit} from '../../utils/unitUtils';
 
-export interface UnitInputProps<T extends DimensionName> {
-  dimension: T;
-  textFn: UnitTextFn;
-}
+export type UnitInputProps = UnitSelectorButtonProps;
 
-export const UnitInput = <T extends DimensionName>({dimension, textFn}: UnitInputProps<T>) => {
-  const {units} = allUnits[dimension];
+export const UnitInput = ({dimension, textFn, selectedUnit, unitText, prefixText, onChange}: UnitInputProps) => {
   const [value, setValue] = useState<number>(1);
-  const [unit, setUnit] = useState<string>(Object.values(units)[0].baseUnit.key);
+  const [unit, setUnit] = useState<Unit>(initializeUnit(dimension, selectedUnit));
+
   useEffect(() => {
-    setUnit(Object.values(units)[0].baseUnit.key);
-  }, [dimension, units]);
-  const options: SingleSelectOption[] = Object.values(units).map((unit) => ({
-    label: textFn(unit),
-    value: unit.key,
-  }));
+    setUnit(initializeUnit(dimension, selectedUnit));
+  }, [dimension, selectedUnit]);
+
+  useEffect(() => {
+    onChange && onChange(unit);
+  }, [onChange, unit]);
+
   return <span className={style.unitInput}>
     <span>
       <TextField
@@ -30,12 +28,13 @@ export const UnitInput = <T extends DimensionName>({dimension, textFn}: UnitInpu
         value={value.toString()}
       />
     </span>
-    <span>
-      <Select
-        options={options}
-        onChange={setUnit}
-        value={unit}
-      />
-    </span>
+    <UnitSelectorButton
+      dimension={dimension}
+      onChange={setUnit}
+      prefixText={prefixText}
+      selectedUnit={unit}
+      textFn={textFn}
+      unitText={unitText}
+    />
   </span>;
 }
