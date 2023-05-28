@@ -24,12 +24,7 @@ jobs:
       - name: Build package
         run: npm run build
 
-      - name: Publish package
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: |
-          if [ -n "$(git diff --name-only HEAD^ HEAD | grep 'package.json')" ]; then
-            npm publish
-          else
-            echo "No changes in package.json. Skipping package publication."
-          fi
+      - name: Publish if version has been updated
+        uses: JS-DevTools/npm-publish@v2
+        with:
+          token: ${{ secrets.NPM_TOKEN }}
