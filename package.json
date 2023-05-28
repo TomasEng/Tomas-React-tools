@@ -3,6 +3,7 @@
   "description": "Tomas' React tools",
   "version": "0.1.7",
   "homepage": "http://TomasEng.github.io/Tomas-React-tools",
+  "main": "lib/index.js",
   "dependencies": {
     "@digdir/design-system-react": "0.12.1",
     "@testing-library/jest-dom": "5.16.5",
@@ -71,5 +72,8 @@
     "prop-types": "15.8.1",
     "storybook": "7.0.18",
     "webpack": "5.84.1"
-  }
+  },
+  "files": [
+    "lib/**/*"
+  ]
 }
