@@ -1,6 +1,8 @@
 import {Prefix} from 'enheter/lib/Prefix';
 
 export const unitPrefixes: Prefix[] = [
+  'quetta',
+  'ronna',
   'yotta',
   'zetta',
   'exa',
@@ -22,4 +24,6 @@ export const unitPrefixes: Prefix[] = [
   'atto',
   'zepto',
   'yocto',
+  'ronto',
+  'quecto',
 ];

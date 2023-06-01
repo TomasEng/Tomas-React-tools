@@ -1,11 +1,8 @@
-import {Dimension, DimensionName, findDimensionName, findUnitName, Unit, UnitName} from 'enheter';
+import {Dimension, findDimensionName, findUnitName, Unit} from 'enheter';
 import {capitalize} from '../utils/stringUtils';
+import {UnitKeywords} from '../types';
 
-const unitTexts: {
-  [dimensionName in DimensionName]: {
-    [unitName in UnitName<dimensionName>]: string[];
-  }
-} = {
+const unitTexts: UnitKeywords = {
   length: {
     angstrom: ['ångström', 'ångströms'],
     astronomicalUnit: ['astronomical unit', 'astronomical units'],
