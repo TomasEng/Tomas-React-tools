@@ -1,9 +1,10 @@
 import {allUnits, DimensionName, findDimensionName, Unit, UnitName} from 'enheter';
 import {unitDimensions} from '../data/unitDimensions';
-import {UnitKeywords, UnitPrefixKeywords} from '../types';
+import {UnitKeys, UnitKeywords, UnitPrefixKeywords} from '../types';
 import {matchArray} from './arrayUtils';
 import {containsAllCharsInOrder} from './stringUtils';
 import {Prefix} from 'enheter/lib/Prefix';
+import {UnitOrPrefixSearchResultItem} from '../classes';
 
 export const initializeUnit = (dimension: DimensionName, unit?: Unit) => {
   const validUnits = allUnits[dimension].units;
@@ -23,8 +24,8 @@ export const matchingUnits = (
   keyword: string,
   unitKeywords: UnitKeywords,
   dimensions: DimensionName[] = unitDimensions
-): Unit[] => {
-  const matchingUnits: Unit[] = [];
+): UnitKeys<DimensionName>[] => {
+  const matchingUnits: UnitKeys<DimensionName>[] = [];
   for (const dimension of dimensions) {
     const unitNames = unitNamesOfDimension(dimension);
     for (const unitName of unitNames) {
@@ -34,7 +35,10 @@ export const matchingUnits = (
       const unit = allUnits[dimension].units[unitName];
       if (matchArray(keywords, keyword) || containsAllCharsInOrder(keyword, unit.symbol)) {
         // @ts-ignore
-        matchingUnits.push(unit);
+        matchingUnits.push({
+          dimensionKey: dimension,
+          unitKey: unitName,
+        });
       }
     }
   }
@@ -43,3 +47,35 @@ export const matchingUnits = (
 
 export const matchingPrefixes = (keyword: string, prefixKeywords: UnitPrefixKeywords): Prefix[] =>
   Object.keys(prefixKeywords).filter(prefix => matchArray(prefixKeywords[prefix], keyword));
+
+interface PrefixKeywordAtStartOfStringResult {
+  prefix: Prefix;
+  matchingKeyword: string;
+}
+
+export const prefixKeywordAtStartOfString = (
+  str: string,
+  prefixKeywords: UnitPrefixKeywords
+): PrefixKeywordAtStartOfStringResult =>
+  Object
+    .entries(prefixKeywords)
+    .map(([prefix, keywords]) => keywords.map(keyword => ({prefix, matchingKeyword: keyword})))
+    .flat()
+    .find(r => str.startsWith(r.matchingKeyword))
+  ?? {prefix: null, matchingKeyword: ''};
+
+export const matchingUnitsWithPrefix = (
+  keyword: string,
+  unitKeywords: UnitKeywords,
+  prefixKeywords: UnitPrefixKeywords
+): UnitOrPrefixSearchResultItem[] => {
+  const units = matchingUnits(keyword, unitKeywords).map(UnitOrPrefixSearchResultItem.fromUnitKeys);
+  const prefixes = matchingPrefixes(keyword, prefixKeywords).map(UnitOrPrefixSearchResultItem.fromPrefix);
+  if (units.length + prefixes.length) return units.concat(prefixes);
+  const {prefix, matchingKeyword} = prefixKeywordAtStartOfString(keyword, prefixKeywords);
+  if (prefix) {
+    const keywordWithoutPrefix = keyword.slice(matchingKeyword.length);
+    return matchingUnits(keywordWithoutPrefix, unitKeywords)
+      .map(UnitOrPrefixSearchResultItem.fromUnitKeysWithPrefix(prefix));
+  } else return [];
+}

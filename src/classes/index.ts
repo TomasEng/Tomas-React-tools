@@ -1,0 +1,1 @@
+export {UnitOrPrefixSearchResultItem} from './UnitOrPrefixSearchResultItem';

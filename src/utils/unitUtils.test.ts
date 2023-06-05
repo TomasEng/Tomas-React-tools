@@ -1,5 +1,11 @@
-import {chargeUnit, lengthUnit, massUnit} from 'enheter';
-import {initializeUnit, matchingPrefixes, matchingUnits} from './unitUtils';
+import {lengthUnit, massUnit} from 'enheter';
+import {
+  initializeUnit,
+  matchingPrefixes,
+  matchingUnits,
+  matchingUnitsWithPrefix,
+  prefixKeywordAtStartOfString
+} from './unitUtils';
 import {unitKeywords} from '../test-data/unitKeywords';
 import {unitPrefixKeywords} from '../test-data/unitPrefixKeywords';
 
@@ -25,13 +31,13 @@ describe('unitUtils', () => {
     it('Returns the units of which the keywords match the search', () => {
       const result = matchingUnits('coulomb', unitKeywords);
       expect(result).toHaveLength(2);
-      expect(result).toContain(chargeUnit('coulomb'));
-      expect(result).toContain(chargeUnit('statcoulomb'));
+      expect(result).toContainEqual({dimensionKey: 'charge', unitKey: 'coulomb'});
+      expect(result).toContainEqual({dimensionKey: 'charge', unitKey: 'statcoulomb'});
     });
 
     it('Includes the unit\'s symbol when searching', () => {
       const result = matchingUnits('℥', unitKeywords);
-      expect(result).toContain(massUnit('ounce'));
+      expect(result).toContainEqual({dimensionKey: 'mass', unitKey: 'ounce'});
     });
   });
 
@@ -41,6 +47,34 @@ describe('unitUtils', () => {
       expect(result).toHaveLength(2);
       expect(result).toContain('ronto');
       expect(result).toContain('ronna');
+    });
+  });
+
+  describe('prefixKeywordAtStartOfString', () => {
+    it('Returns the prefix of which one of the keywords match the start of the string', () => {
+      expect(prefixKeywordAtStartOfString('kilometer', unitPrefixKeywords)).toEqual({
+        prefix: 'kilo',
+        matchingKeyword: 'kilo'
+      });
+      expect(prefixKeywordAtStartOfString('centimeter', unitPrefixKeywords)).toEqual({
+        prefix: 'centi',
+        matchingKeyword: 'centi'
+      });
+      expect(prefixKeywordAtStartOfString('meter', unitPrefixKeywords)).toEqual({prefix: null, matchingKeyword: ''});
+      expect(prefixKeywordAtStartOfString('kilo', unitPrefixKeywords)).toEqual({
+        prefix: 'kilo',
+        matchingKeyword: 'kilo'
+      });
+    });
+  });
+
+  describe('matchingUnitsWithPrefix', () => {
+    it('Returns a list of matching units if the keyword matches units', () => {
+      const result = matchingUnitsWithPrefix('metre', unitKeywords, unitPrefixKeywords);
+      expect(result).toContainEqual({unit: {dimensionKey: 'length', unitKey: 'metre'}, prefix: null});
+      expect(result).toContainEqual({unit: {dimensionKey: 'area', unitKey: 'squareMetre'}, prefix: null});
+      expect(result).toContainEqual({unit: {dimensionKey: 'volume', unitKey: 'cubicMetre'}, prefix: null});
+      expect(result).not.toContainEqual({unit: {dimensionKey: 'temperature', unitKey: 'celsius'}, prefix: null});
     });
   });
 });
