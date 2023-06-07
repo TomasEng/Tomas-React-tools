@@ -23,6 +23,30 @@ export class UnitOrPrefixSearchResultItem {
     return new UnitOrPrefixSearchResultItem(undefined, prefix);
   }
 
+  /**
+   * Generate a UnitOrPrefixSearchResultItem from an id of the format dimensionKey.unitKey.prefix
+   * @param id The id to generate from.
+   * @returns A UnitOrPrefixSearchResultItem.
+   */
+  public static fromId(id: string): UnitOrPrefixSearchResultItem {
+    const [dimensionKey, unitKey, prefix] = id.split('.');
+    const unit = dimensionKey && unitKey
+      ? {dimensionKey, unitKey} as UnitKeys<DimensionName>
+      : undefined;
+    return new UnitOrPrefixSearchResultItem(unit, prefix as Prefix || null);
+  }
+
+  /**
+   * Generate an id of the format dimensionKey.unitKey.prefix for internal use.
+   */
+  public id(): string {
+    const prefixKey = this.prefix || '';
+    if (this.unit) {
+      const {dimensionKey, unitKey} = this.unit;
+      return `${dimensionKey}.${unitKey}.${prefixKey}`;
+    } else return `..${prefixKey}`;
+  }
+
   public isPrefixOnly(): boolean {
     return !this.unit;
   }

@@ -71,11 +71,13 @@ export const matchingUnitsWithPrefix = (
 ): UnitOrPrefixSearchResultItem[] => {
   const units = matchingUnits(keyword, unitKeywords).map(UnitOrPrefixSearchResultItem.fromUnitKeys);
   const prefixes = matchingPrefixes(keyword, prefixKeywords).map(UnitOrPrefixSearchResultItem.fromPrefix);
-  if (units.length + prefixes.length) return units.concat(prefixes);
+  const result = [...units, ...prefixes];
   const {prefix, matchingKeyword} = prefixKeywordAtStartOfString(keyword, prefixKeywords);
   if (prefix) {
     const keywordWithoutPrefix = keyword.slice(matchingKeyword.length);
-    return matchingUnits(keywordWithoutPrefix, unitKeywords)
+    const prefixedUnits = matchingUnits(keywordWithoutPrefix, unitKeywords)
       .map(UnitOrPrefixSearchResultItem.fromUnitKeysWithPrefix(prefix));
-  } else return [];
+    result.push(...prefixedUnits);
+  }
+  return result;
 }

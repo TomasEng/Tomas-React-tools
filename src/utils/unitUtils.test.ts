@@ -76,5 +76,23 @@ describe('unitUtils', () => {
       expect(result).toContainEqual({unit: {dimensionKey: 'volume', unitKey: 'cubicMetre'}, prefix: null});
       expect(result).not.toContainEqual({unit: {dimensionKey: 'temperature', unitKey: 'celsius'}, prefix: null});
     });
+
+    it('Returns a list of matching units and prefixes if the keyword matches units and prefixes', () => {
+      const result = matchingUnitsWithPrefix('ce', unitKeywords, unitPrefixKeywords);
+      expect(result).toContainEqual({unit: {dimensionKey: 'temperature', unitKey: 'celsius'}, prefix: null});
+      expect(result).toContainEqual({unit: undefined, prefix: 'centi'});
+      expect(result).not.toContainEqual({unit: {dimensionKey: 'length', unitKey: 'metre'}, prefix: null});
+    });
+
+    it('Returns a list of matching units with prefix if the keyword matches a prefixed unit', () => {
+      const result = matchingUnitsWithPrefix('centimetre', unitKeywords, unitPrefixKeywords);
+      expect(result).toContainEqual({unit: {dimensionKey: 'length', unitKey: 'metre'}, prefix: 'centi'});
+      expect(result).not.toContainEqual({unit: {dimensionKey: 'length', unitKey: 'metre'}, prefix: null});
+    });
+
+    it('Includes matcing prefixless units in the result when searching for prefixed units', () => {
+      const result = matchingUnitsWithPrefix('centimetre', unitKeywords, unitPrefixKeywords);
+      expect(result).toContainEqual({unit: {dimensionKey: 'density', unitKey: 'gramPerCubicCentimetre'}, prefix: null});
+    });
   });
 });
