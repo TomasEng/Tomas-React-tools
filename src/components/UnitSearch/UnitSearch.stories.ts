@@ -2,6 +2,7 @@ import type {Meta, StoryObj} from '@storybook/react';
 import {UnitSearch} from './UnitSearch';
 import {unitKeywords} from '../../test-data/unitKeywords';
 import {unitPrefixKeywords} from '../../test-data/unitPrefixKeywords';
+import {unitTextFn} from '../../test-data/unitTextFn';
 
 const meta = {
   title: 'Components/UnitSearch',
@@ -18,7 +19,9 @@ type Story = StoryObj<typeof meta>;
 export const Example: Story = {
   args: {
     unitKeywords,
-    prefxKeywords: unitPrefixKeywords
+    prefixKeywords: unitPrefixKeywords,
+    unitTextFn,
+    placeholder: "Enter a unit"
   },
 };
 

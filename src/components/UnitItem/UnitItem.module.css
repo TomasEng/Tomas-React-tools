@@ -1,0 +1,13 @@
+.root {
+    display: inline-flex;
+    flex-direction: column;
+}
+
+.unit {
+    font-size: 1rem;
+}
+
+.dimension {
+    font-size: 0.8rem;
+    color: #666;
+}

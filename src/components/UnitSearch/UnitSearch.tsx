@@ -1,40 +1,27 @@
-import React, {useId, useMemo, useState} from 'react';
-import {TextField} from '@digdir/design-system-react';
+import React, {useCallback} from 'react';
 import {matchingUnitsWithPrefix} from '../../utils/unitUtils';
-import {UnitKeywords, UnitPrefixKeywords} from '../../types';
-import {UnitOrPrefixSearchResultItem} from '../../classes';
+import {UnitKeywords, UnitPrefixKeywords, UnitTextFn} from '../../types';
+import {Combobox} from '../Combobox';
 
 export type UnitSearchProps = {
   unitKeywords: UnitKeywords;
-  prefxKeywords: UnitPrefixKeywords;
+  prefixKeywords: UnitPrefixKeywords;
+  unitTextFn: UnitTextFn;
+  placeholder?: string;
 };
 
 export const UnitSearch = ({
                              unitKeywords,
-                             prefxKeywords,
+                             prefixKeywords,
+                             unitTextFn,
+                             placeholder,
                            }: UnitSearchProps) => {
-  const listId = useId();
-  const [searchValue, setSearchValue] = useState<string>('');
-  const searchResult = useMemo(
-    () => matchingUnitsWithPrefix(searchValue, unitKeywords, prefxKeywords),
-    [prefxKeywords, searchValue, unitKeywords]
+  const searchResult = useCallback(
+    (keyword: string) => matchingUnitsWithPrefix(keyword, unitKeywords, prefixKeywords).map(it => it.comboboxItem(unitTextFn)),
+    [prefixKeywords, unitKeywords, unitTextFn]
   );
 
   return (
-    <>
-      <TextField
-        list={listId}
-        value={searchValue}
-        onChange={e => setSearchValue(e.target.value)}
-      />
-      <datalist id={listId}>
-        {searchResult.map(searchResultOption)}
-      </datalist>
-    </>
+    <Combobox searchResult={searchResult} placeholder={placeholder}/>
   );
 }
-
-const searchResultOption = (item: UnitOrPrefixSearchResultItem) => {
-  const id = item.id();
-  return <option key={id} value={id}>{id}</option>;
-};

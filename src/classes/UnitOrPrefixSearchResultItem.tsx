@@ -1,6 +1,9 @@
-import {DimensionName} from 'enheter';
+import {DimensionName, findDimensionName} from 'enheter';
 import {Prefix} from 'enheter/lib/Prefix';
-import {UnitKeys} from '../types';
+import {UnitKeys, UnitTextFn} from '../types';
+import {ComboboxItem, UnitItem} from '../components';
+import React from 'react';
+import {findUnitFromUnitKeys} from '../utils/unitUtils';
 
 export class UnitOrPrefixSearchResultItem {
   unit?: UnitKeys<DimensionName>;
@@ -49,5 +52,20 @@ export class UnitOrPrefixSearchResultItem {
 
   public isPrefixOnly(): boolean {
     return !this.unit;
+  }
+
+  public comboboxItem(unitTextFn: UnitTextFn): ComboboxItem {
+    let label;
+    if (this.isPrefixOnly()) {
+      label = this.prefix;
+    } else {
+      const unit = findUnitFromUnitKeys<DimensionName>(this.unit);
+      const {dimension, symbol} = unit;
+      label = <UnitItem name={unitTextFn(unit)} symbol={symbol} dimension={findDimensionName(dimension)!}/>
+    }
+    return {
+      value: this.id(),
+      label,
+    };
   }
 }
