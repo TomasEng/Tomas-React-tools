@@ -82,8 +82,12 @@ export const matchingUnitsWithPrefix = (
   return result;
 }
 
-export const findUnit = <D extends DimensionName>(dimension: D, unitName: UnitName<D>): Unit =>
-  allUnits?.[dimension].units?.[unitName] as Unit;
+export const findUnit = <D extends DimensionName>(dimension: D, unitName: UnitName<D>): Unit => {
+  for (const [key, unit] of Object.entries(allUnits[dimension].units)) {
+    if (key === unitName) return unit;
+  }
+  throw new Error(`No unit with name ${unitName} in dimension ${dimension}.`);
+}
 
 export const findUnitFromUnitKeys = <D extends DimensionName>({
                                                                 dimensionKey,

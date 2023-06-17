@@ -1,5 +1,6 @@
 import {lengthUnit, massUnit} from 'enheter';
 import {
+  findUnit,
   initializeUnit,
   matchingPrefixes,
   matchingUnits,
@@ -93,6 +94,13 @@ describe('unitUtils', () => {
     it('Includes matcing prefixless units in the result when searching for prefixed units', () => {
       const result = matchingUnitsWithPrefix('centimetre', unitKeywords, unitPrefixKeywords);
       expect(result).toContainEqual({unit: {dimensionKey: 'density', unitKey: 'gramPerCubicCentimetre'}, prefix: null});
+    });
+  });
+
+  describe('findUnit', () => {
+    it('Returns the unit if it is found', () => {
+      expect(findUnit('length', 'metre')).toEqual(lengthUnit('metre'));
+      expect(findUnit('mass', 'kilogram')).toEqual(massUnit('kilogram'));
     });
   });
 });
