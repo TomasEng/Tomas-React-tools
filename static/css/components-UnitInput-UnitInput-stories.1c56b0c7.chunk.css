@@ -1,0 +1,40 @@
+.UnitInput_unitInput__rdQhG {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    gap: 1rem;
+}
+
+.UnitInput_unitInput__rdQhG > * {
+    flex: 1 1;
+}
+.UnitSelector_root__YtK42 {
+    display: inline-flex;
+    flex-direction: column;
+    width: 144px;
+    gap: 1rem;
+}
+
+.UnitSelector_unitSelector__q2QvD {
+    flex: 1 1;
+}
+
+.UnitSelector_prefixSelector__kQcuS {
+    flex: 1 1;
+}
+.UnitItem_root__h076S {
+    display: inline-flex;
+    flex-direction: column;
+}
+
+.UnitItem_unit__Ndkxa {
+    font-size: 1rem;
+}
+
+.UnitItem_dimension__b1NKZ {
+    font-size: 0.8rem;
+    color: #666;
+}
+
+/*# sourceMappingURL=components-UnitInput-UnitInput-stories.1c56b0c7.chunk.css.map*/
