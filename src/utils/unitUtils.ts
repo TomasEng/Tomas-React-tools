@@ -5,6 +5,8 @@ import {matchArray} from './arrayUtils';
 import {containsAllCharsInOrder} from './stringUtils';
 import {Prefix} from 'enheter/lib/Prefix';
 import {UnitOrPrefixSearchResultItem} from '../classes';
+import {orderByKeywords} from './sortUtils';
+import {compareMatch} from './compareFunctions';
 
 export const initializeUnit = (dimension: DimensionName, unit?: Unit) => {
   const validUnits = allUnits[dimension].units;
@@ -93,3 +95,28 @@ export const findUnitFromUnitKeys = <D extends DimensionName>({
                                                                 dimensionKey,
                                                                 unitKey
                                                               }: UnitKeys<D>) => findUnit(dimensionKey, unitKey);
+
+export const orderSearchResults = (
+  results: UnitOrPrefixSearchResultItem[],
+  keyword: string,
+  unitKeywords: UnitKeywords,
+  prefixKeywords: UnitPrefixKeywords
+): UnitOrPrefixSearchResultItem[] => {
+  const keywordMap = new Map<string, string[]>(
+    results.map(result => {
+      // @ts-ignore
+      const keywords = result.isPrefixOnly() ? prefixKeywords[result.prefix] : unitKeywords?.[result.dimension]?.[result.unit];
+      return [result.id(), keywords];
+    })
+  );
+  const byKeywords = orderByKeywords(keywordMap, compareMatch(keyword)).map(UnitOrPrefixSearchResultItem.fromId);
+
+  const score = (result: UnitOrPrefixSearchResultItem): number => {
+    if (result.isPrefixOnly()) return 0;
+    if (result.prefix) return 1;
+    else return 2;
+  };
+  const compareFn = (a: UnitOrPrefixSearchResultItem, b: UnitOrPrefixSearchResultItem) => score(a) - score(b);
+
+  return byKeywords.sort(compareFn);
+}

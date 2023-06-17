@@ -17,6 +17,7 @@ import {Item} from './Item';
 export interface ComboboxItem {
   value: string;
   label: React.ReactNode;
+  searchString?: string;
 }
 
 export interface ComboboxProps {
@@ -80,9 +81,13 @@ export const Combobox = ({placeholder, searchResult}: ComboboxProps) => {
   const items = searchResult(inputValue);
 
   const selectItem = (item: ComboboxItem) => {
-    setInputValue('');
+    if (item.searchString) {
+      setInputValue(item.searchString);
+    } else {
+      setInputValue('');
+      setSelectedItem(item);
+    }
     setOpen(false);
-    setSelectedItem(item);
   }
 
   if (selectedItem) {

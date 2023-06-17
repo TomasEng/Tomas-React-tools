@@ -1,7 +1,7 @@
 import {DimensionName, findDimensionName} from 'enheter';
 import {Prefix} from 'enheter/lib/Prefix';
-import {UnitKeys, UnitTextFn} from '../types';
-import {ComboboxItem, UnitItem} from '../components';
+import {UnitKeys, UnitPrefixTextFn, UnitTextFn} from '../types';
+import {ComboboxItem, UnitItem, UnitPrefixItem} from '../components';
 import React from 'react';
 import {findUnitFromUnitKeys} from '../utils/unitUtils';
 
@@ -54,20 +54,25 @@ export class UnitOrPrefixSearchResultItem {
     return !this.unit;
   }
 
-  public comboboxItem(unitTextFn: UnitTextFn): ComboboxItem {
+  public comboboxItem(unitTextFn: UnitTextFn, unitPrefixTextFn: UnitPrefixTextFn): ComboboxItem {
     let label;
+    let searchString = undefined;
     if (this.isPrefixOnly()) {
-      label = this.prefix;
+      const prefixName = unitPrefixTextFn(this.prefix);
+      label = <UnitPrefixItem prefix={this.prefix} prefixName={prefixName}/>;
+      searchString = prefixName;
     } else if (!this.unit) {
       throw new Error('Something impossible happened.');
     } else {
       const unit = findUnitFromUnitKeys<DimensionName>(this.unit!);
-      const {dimension, symbol} = unit;
-      label = <UnitItem name={unitTextFn(unit)} symbol={symbol} dimension={findDimensionName(dimension)!}/>
+      const prefixedUnit = unit.withPrefix(this.prefix);
+      const {dimension, symbol} = prefixedUnit;
+      label = <UnitItem name={unitTextFn(prefixedUnit)} symbol={symbol} dimension={findDimensionName(dimension)!}/>
     }
     return {
       value: this.id(),
       label,
+      searchString,
     };
   }
 }

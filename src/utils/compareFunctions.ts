@@ -4,7 +4,7 @@
  * a negative number if the first parameter should be sorted before the second, or 0 if there is no preference.
  */
 
-import { containsAllCharsInOrder, numberOfMatchingChars } from './stringUtils';
+import {containsAllCharsInOrder, numberOfMatchingChars} from './stringUtils';
 
 export type CompareFunction<T> = (a: T, b: T) => number;
 export type SearchCompareFunction = (search: string) => CompareFunction<string>;

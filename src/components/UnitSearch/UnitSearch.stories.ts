@@ -3,6 +3,7 @@ import {UnitSearch} from './UnitSearch';
 import {unitKeywords} from '../../test-data/unitKeywords';
 import {unitPrefixKeywords} from '../../test-data/unitPrefixKeywords';
 import {unitTextFn} from '../../test-data/unitTextFn';
+import {unitPrefixTextFn} from '../../test-data/unitPrefixTextFn';
 
 const meta = {
   title: 'Components/UnitSearch',
@@ -21,6 +22,7 @@ export const Example: Story = {
     unitKeywords,
     prefixKeywords: unitPrefixKeywords,
     unitTextFn,
+    unitPrefixTextFn,
     placeholder: "Enter a unit"
   },
 };
