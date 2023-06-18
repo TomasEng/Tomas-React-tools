@@ -105,13 +105,16 @@ export const orderSearchResults = (
 ): UnitOrPrefixSearchResultItem[] => {
   const keywordMap = new Map<string, string[]>(
     results.map(result => {
-      const keywords = result.isPrefixOnly()
-        ? prefixKeywords[result.prefix!]
-        // @ts-ignore
-        : unitKeywords?.[result.unit!.dimensionKey]?.[result.unit!.unitKey];
-      if (result.unit) {
-        const unit = findUnitFromUnitKeys(result.unit);
-        keywords.push(unitTextFn(unit));
+      let keywords: string[];
+      if (result.isPrefixOnly()) {
+        keywords = prefixKeywords[result.prefix!];
+      } else {
+        const unit = findUnitFromUnitKeys(result.unit!);
+        keywords = [
+          // @ts-ignore
+          ...unitKeywords?.[result.unit!.dimensionKey]?.[result.unit!.unitKey],
+          unitTextFn(unit)
+        ];
       }
       return [result.id(), keywords];
     })

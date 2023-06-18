@@ -1,4 +1,4 @@
-import {capitalize, containsAllCharsInOrder, indicesOf, numberOfMatchingChars} from './stringUtils';
+import {capitalize, containsAllCharsInOrder, indicesOf, matchRatio, numberOfMatchingChars} from './stringUtils';
 
 describe('stringUtils', () => {
   describe('capitalize', () => {
@@ -112,6 +112,39 @@ describe('stringUtils', () => {
       expect(containsAllCharsInOrder('AbC', 'aBc')).toBe(true);
       expect(containsAllCharsInOrder('aBc', 'ABC')).toBe(true);
       expect(containsAllCharsInOrder('AbC', 'abc')).toBe(true);
+    });
+  });
+
+  describe('matchRatio', () => {
+    it('Returns 0 if strings are empty', () => {
+      expect(matchRatio('', '')).toBe(0);
+    });
+
+    it('Returns 0 if one of the strings is empty', () => {
+      expect(matchRatio('', 'abc')).toBe(0);
+      expect(matchRatio('cde', '')).toBe(0);
+    });
+
+    it('Returns 1 if strings are equal', () => {
+      expect(matchRatio('abc', 'abc')).toBe(1);
+      expect(matchRatio('Lorem ipsum', 'Lorem ipsum')).toBe(1);
+    });
+
+    it('Returns 1 if all characters are present in both strings', () => {
+      expect(matchRatio('abc', 'cba')).toBe(1);
+      expect(matchRatio('Lorem ipsum', 'ipsum Lorem')).toBe(1);
+    });
+
+    it('Returns correct ratio', () => {
+      expect(matchRatio('abc', 'abcdef')).toBe(0.5);
+      expect(matchRatio('Lorem', 'Loremipsum')).toBe(0.5);
+      expect(matchRatio('cba', 'abcdef')).toBe(0.5);
+    });
+
+    it('Works the other way around', () => {
+      expect(matchRatio('abcdef', 'abc')).toBe(0.5);
+      expect(matchRatio('Loremipsum', 'Lorem')).toBe(0.5);
+      expect(matchRatio('abcdef', 'cba')).toBe(0.5);
     });
   });
 });

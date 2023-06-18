@@ -48,3 +48,30 @@ export const containsAllCharsInOrder = (search: string, data: string): boolean =
   }
   return false;
 };
+
+/**
+ * Returns a number between 0 and 1 representing the ratio of matching characters in the search string and the data string.
+ * @param search The string to search for.
+ * @param data The string to search in.
+ * @returns A number between 0 and 1 representing the ratio of matching characters in the search string and the data string.
+ */
+export const matchRatio = (search: string, data: string): number => {
+  if (!search || !data) return 0;
+  const searchLower = search.toLowerCase();
+  const dataLower = data.toLowerCase();
+  const [shortest, longest] = searchLower.length < dataLower.length
+    ? [searchLower, dataLower]
+    : [dataLower, searchLower];
+  const matchedIndices: number[] = [];
+  for (let i = 0; i < shortest.length; i++) {
+    const char = shortest[i];
+    // Find a matching char in B that is not already matched
+    for (const index of indicesOf(char, longest)) {
+      if (!matchedIndices.includes(index)) {
+        matchedIndices.push(index);
+        break;
+      }
+    }
+  }
+  return matchedIndices.length / longest.length;
+}

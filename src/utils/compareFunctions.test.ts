@@ -1,6 +1,8 @@
 import {
+  compareLength,
   compareMatch,
   compareMatchingCharsInOrder,
+  compareMatchingRatio,
   compareNumberOfMatchingChars,
 } from './compareFunctions';
 
@@ -74,6 +76,32 @@ describe('compareFunctions', () => {
     it('Returns 0 if A and B match the same number of chars', () => {
       expect(compare('abcde', 'edcba')).toBe(0);
       expect(compare('Lorem abc', 'ipsum cab')).toBe(0);
+    });
+  });
+
+  describe('compareMatchingRatio', () => {
+    it.each([
+      ['abcd', 'abcde', 'abc'],
+      ['dcba', 'edcba', 'abc'],
+    ])('Sorts "%s" before "%s" when search string is "%s"', (a, b, search) => {
+      const compare = compareMatchingRatio(search);
+      expect(compare(a, b)).toBeLessThan(0);
+      expect(compare(b, a)).toBeGreaterThan(0);
+    });
+
+    it('Is case insensitive', () => {
+      const compare = compareMatchingRatio('abc');
+      expect(compare('ABC', 'abc')).toBe(0);
+    });
+  });
+
+  describe('compareLength', () => {
+    it.each([
+      ['abc', 'abcde'],
+      ['Lipsum', 'Lorem ipsum'],
+    ])('Sorts "%s" before "%s"', (a, b) => {
+      expect(compareLength(a, b)).toBeLessThan(0);
+      expect(compareLength(b, a)).toBeGreaterThan(0);
     });
   });
 

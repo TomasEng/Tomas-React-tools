@@ -4,7 +4,7 @@
  * a negative number if the first parameter should be sorted before the second, or 0 if there is no preference.
  */
 
-import {containsAllCharsInOrder, numberOfMatchingChars} from './stringUtils';
+import {containsAllCharsInOrder, matchRatio, numberOfMatchingChars} from './stringUtils';
 
 export type CompareFunction<T> = (a: T, b: T) => number;
 export type SearchCompareFunction = (search: string) => CompareFunction<string>;
@@ -40,15 +40,26 @@ export const compareNumberOfMatchingChars: SearchCompareFunction =
     return bMatches - aMatches;
   };
 
+export const compareMatchingRatio: SearchCompareFunction =
+  (search) => (a, b) => {
+    const aRatio: number = matchRatio(search, a);
+    const bRatio: number = matchRatio(search, b);
+    return bRatio - aRatio;
+  };
+
+export const compareLength: CompareFunction<string> = (a, b) => a.length - b.length;
+
 /**
  * Returns a sort function with the following strategy:
  * 1. Sort strings that contain all chars in the search string in the same order first.
  *    If the characters match at different indices, sort by the index of the first match.
  *    If those are the same, sort by the index of the second match, and so on.
- * 2. Sort by the number of matching characters.
+ * 2. Sort by the ratio of matching characters.
  */
 export const compareMatch: SearchCompareFunction = (search) => (a, b) => {
   const comparedInOrder: number = compareMatchingCharsInOrder(search)(a, b);
   if (comparedInOrder !== 0) return comparedInOrder;
-  return compareNumberOfMatchingChars(search)(a, b);
+  const comparedByRatio: number = compareMatchingRatio(search)(a, b);
+  if (comparedByRatio !== 0) return comparedByRatio;
+  return 0;
 };

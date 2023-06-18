@@ -1,7 +1,7 @@
-import type { CompareFunction } from './compareFunctions';
+import type {CompareFunction} from './compareFunctions';
 
 /**
- * Sorts a list of keys according to corresponding keywords and a given compare function..
+ * Sorts a list of keys according to corresponding keywords and a given compare function.
  * If a keyword list is empty or undefined, the key itself is used instead.
  * @param {Map<string, string[] | undefined>} keywordMap A map of keys to lists of keywords.
  * @param {CompareFunction<string>} compareFn A compare function to sort the keywords.
@@ -26,4 +26,4 @@ export const orderByKeywords = (
       }
       return 0;
     })
-    .map(({ key }) => key);
+    .map(({key}) => key);
