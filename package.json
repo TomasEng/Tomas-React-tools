@@ -60,18 +60,18 @@
     ]
   },
   "devDependencies": {
-    "@storybook/addon-essentials": "7.0.18",
-    "@storybook/addon-interactions": "7.0.18",
-    "@storybook/addon-links": "7.0.18",
-    "@storybook/blocks": "7.0.18",
-    "@storybook/preset-create-react-app": "7.0.18",
-    "@storybook/react": "7.0.18",
-    "@storybook/react-webpack5": "7.0.18",
+    "@storybook/addon-essentials": "7.0.22",
+    "@storybook/addon-interactions": "7.0.22",
+    "@storybook/addon-links": "7.0.22",
+    "@storybook/blocks": "7.0.22",
+    "@storybook/preset-create-react-app": "7.0.22",
+    "@storybook/react": "7.0.22",
+    "@storybook/react-webpack5": "7.0.22",
     "@storybook/testing-library": "0.0.14-next.2",
     "babel-plugin-named-exports-order": "0.0.2",
     "gh-pages": "5.0.0",
     "prop-types": "15.8.1",
-    "storybook": "7.0.18",
+    "storybook": "7.0.22",
     "webpack": "5.84.1"
   },
   "files": [

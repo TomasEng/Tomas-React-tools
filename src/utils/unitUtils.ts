@@ -1,6 +1,6 @@
 import {allUnits, DimensionName, findDimensionName, Unit, UnitName} from 'enheter';
 import {unitDimensions} from '../data/unitDimensions';
-import {UnitKeys, UnitKeywords, UnitPrefixKeywords} from '../types';
+import {UnitKeys, UnitKeywords, UnitPrefixKeywords, UnitTextFn} from '../types';
 import {matchArray} from './arrayUtils';
 import {containsAllCharsInOrder} from './stringUtils';
 import {Prefix} from 'enheter/lib/Prefix';
@@ -100,23 +100,21 @@ export const orderSearchResults = (
   results: UnitOrPrefixSearchResultItem[],
   keyword: string,
   unitKeywords: UnitKeywords,
-  prefixKeywords: UnitPrefixKeywords
+  prefixKeywords: UnitPrefixKeywords,
+  unitTextFn: UnitTextFn,
 ): UnitOrPrefixSearchResultItem[] => {
   const keywordMap = new Map<string, string[]>(
     results.map(result => {
-      // @ts-ignore
-      const keywords = result.isPrefixOnly() ? prefixKeywords[result.prefix] : unitKeywords?.[result.dimension]?.[result.unit];
+      const keywords = result.isPrefixOnly()
+        ? prefixKeywords[result.prefix!]
+        // @ts-ignore
+        : unitKeywords?.[result.unit!.dimensionKey]?.[result.unit!.unitKey];
+      if (result.unit) {
+        const unit = findUnitFromUnitKeys(result.unit);
+        keywords.push(unitTextFn(unit));
+      }
       return [result.id(), keywords];
     })
   );
-  const byKeywords = orderByKeywords(keywordMap, compareMatch(keyword)).map(UnitOrPrefixSearchResultItem.fromId);
-
-  const score = (result: UnitOrPrefixSearchResultItem): number => {
-    if (result.isPrefixOnly()) return 0;
-    if (result.prefix) return 1;
-    else return 2;
-  };
-  const compareFn = (a: UnitOrPrefixSearchResultItem, b: UnitOrPrefixSearchResultItem) => score(a) - score(b);
-
-  return byKeywords.sort(compareFn);
+  return orderByKeywords(keywordMap, compareMatch(keyword)).map(UnitOrPrefixSearchResultItem.fromId);
 }

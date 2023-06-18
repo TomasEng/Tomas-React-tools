@@ -13,7 +13,8 @@ type Story = StoryObj<typeof meta>;
 
 export const Example: Story = {
   args: {
-    prefix: 'kilo'
+    prefix: 'kilo',
+    prefixName: 'kilo',
   },
 };
 
