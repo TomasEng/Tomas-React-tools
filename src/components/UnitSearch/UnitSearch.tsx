@@ -29,7 +29,5 @@ export const UnitSearch = ({
     ).map(it => createComboboxItem(it, unitTextFn, unitPrefixTextFn)),
     [prefixKeywords, unitKeywords, unitTextFn, unitPrefixTextFn]
   );
-  return (
-    <Combobox searchResult={searchResult} placeholder={placeholder}/>
-  );
+  return <Combobox searchResult={searchResult} placeholder={placeholder}/>;
 }

@@ -107,6 +107,7 @@ export const Combobox = ({placeholder, searchResult}: ComboboxProps) => {
   return (
     <>
       <TextField
+        autoComplete='off'
         autoFocus
         {...getReferenceProps({
           ref: refs.setReference,

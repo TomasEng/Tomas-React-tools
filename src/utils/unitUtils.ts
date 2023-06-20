@@ -6,7 +6,8 @@ import {containsAllCharsInOrder} from './stringUtils';
 import {Prefix} from 'enheter/lib/Prefix';
 import {UnitOrPrefixSearchResultItem} from '../classes';
 import {orderByKeywords} from './sortUtils';
-import {compareMatch} from './compareFunctions';
+import {compareLength, compareMatchingCharsInOrder} from './compareFunctions';
+import {buildCompareFunction} from './buildCompareFunction';
 
 export const initializeUnit = (dimension: DimensionName, unit?: Unit) => {
   const validUnits = allUnits[dimension].units;
@@ -119,5 +120,8 @@ export const orderSearchResults = (
       return [result.id(), keywords];
     })
   );
-  return orderByKeywords(keywordMap, compareMatch(keyword)).map(UnitOrPrefixSearchResultItem.fromId);
+  return orderByKeywords(
+    keywordMap,
+    buildCompareFunction([compareLength, compareMatchingCharsInOrder(keyword)])
+  ).map(UnitOrPrefixSearchResultItem.fromId);
 }

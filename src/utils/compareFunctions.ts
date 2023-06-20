@@ -5,6 +5,7 @@
  */
 
 import {containsAllCharsInOrder, matchRatio, numberOfMatchingChars} from './stringUtils';
+import {buildCompareFunction} from './buildCompareFunction';
 
 export type CompareFunction<T> = (a: T, b: T) => number;
 export type SearchCompareFunction = (search: string) => CompareFunction<string>;
@@ -56,10 +57,5 @@ export const compareLength: CompareFunction<string> = (a, b) => a.length - b.len
  *    If those are the same, sort by the index of the second match, and so on.
  * 2. Sort by the ratio of matching characters.
  */
-export const compareMatch: SearchCompareFunction = (search) => (a, b) => {
-  const comparedInOrder: number = compareMatchingCharsInOrder(search)(a, b);
-  if (comparedInOrder !== 0) return comparedInOrder;
-  const comparedByRatio: number = compareMatchingRatio(search)(a, b);
-  if (comparedByRatio !== 0) return comparedByRatio;
-  return 0;
-};
+export const compareMatch: SearchCompareFunction = (search) =>
+  buildCompareFunction([compareMatchingCharsInOrder(search), compareMatchingRatio(search)]);
