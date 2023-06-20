@@ -1,5 +1,6 @@
 import React, {forwardRef} from 'react';
 import {useId} from '@floating-ui/react';
+import style from './Item.module.css';
 
 interface ItemProps {
   children: React.ReactNode;
@@ -18,12 +19,7 @@ export const Item = forwardRef<
       id={id}
       aria-selected={active}
       {...rest}
-      style={{
-        background: active ? "lightblue" : "none",
-        padding: 4,
-        cursor: "default",
-        ...rest.style
-      }}
+      className={style.item}
     >
       {children}
     </div>

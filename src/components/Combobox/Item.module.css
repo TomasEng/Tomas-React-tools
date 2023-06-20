@@ -1,0 +1,8 @@
+.item {
+    cursor: pointer;
+    padding: 4px;
+}
+
+.item[aria-selected="true"] {
+    background-color: lightblue;
+}

@@ -13,6 +13,7 @@ import {
 } from "@floating-ui/react";
 import {Button, TextField} from '@digdir/design-system-react';
 import {Item} from './Item';
+import style from './Combobox.module.css';
 
 export interface ComboboxItem {
   value: string;
@@ -143,13 +144,9 @@ export const Combobox = ({
             <div
               {...getFloatingProps({
                 ref: refs.setFloating,
-                style: {
-                  ...floatingStyles,
-                  background: "#eee",
-                  color: "black",
-                  overflowY: "auto"
-                }
+                style: floatingStyles
               })}
+              className={style.list}
             >
               {items.map((item, index) => (
                 <Item
