@@ -22,10 +22,15 @@ export interface ComboboxItem {
 
 export interface ComboboxProps {
   placeholder?: string;
+  onChange?: (value: string) => void;
   searchResult: (input: string) => ComboboxItem[];
 }
 
-export const Combobox = ({placeholder, searchResult}: ComboboxProps) => {
+export const Combobox = ({
+                           placeholder,
+                           onChange: triggerOnChange,
+                           searchResult,
+                         }: ComboboxProps) => {
   const [open, setOpen] = useState(false);
   const [inputValue, setInputValue] = useState("");
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
@@ -86,6 +91,7 @@ export const Combobox = ({placeholder, searchResult}: ComboboxProps) => {
     } else {
       setInputValue('');
       setSelectedItem(item);
+      triggerOnChange && triggerOnChange(item.value);
     }
     setOpen(false);
   }
