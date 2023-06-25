@@ -5,6 +5,7 @@ import {Combobox} from '../Combobox';
 import {createComboboxItem} from './createComboboxItem';
 import {Unit} from 'enheter';
 import {UnitOrPrefixSearchResultItem} from '../../classes';
+import style from './UnitSearch.module.css';
 
 export type UnitSearchProps = {
   onChange?: (unit: Unit) => void;
@@ -50,6 +51,7 @@ export const UnitSearch = ({
       onChange={handleChange}
       placeholder={placeholder}
       searchResult={searchResult}
+      selectedClassName={style.selected}
     />
   );
 }

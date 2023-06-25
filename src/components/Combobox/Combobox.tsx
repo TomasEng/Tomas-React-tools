@@ -2,8 +2,6 @@ import React, {useRef, useState} from "react";
 import {
   autoUpdate,
   flip,
-  FloatingFocusManager,
-  FloatingPortal,
   size,
   useDismiss,
   useFloating,
@@ -12,8 +10,7 @@ import {
   useRole
 } from "@floating-ui/react";
 import {Button, TextField} from '@digdir/design-system-react';
-import {Item} from './Item';
-import style from './Combobox.module.css';
+import {ComboboxList} from './ComboboxList';
 
 export interface ComboboxItem {
   value: string;
@@ -25,12 +22,14 @@ export interface ComboboxProps {
   placeholder?: string;
   onChange?: (value: string) => void;
   searchResult: (input: string) => ComboboxItem[];
+  selectedClassName?: string;
 }
 
 export const Combobox = ({
                            placeholder,
                            onChange: triggerOnChange,
                            searchResult,
+                           selectedClassName,
                          }: ComboboxProps) => {
   const [open, setOpen] = useState(false);
   const [inputValue, setInputValue] = useState("");
@@ -39,7 +38,7 @@ export const Combobox = ({
 
   const listRef = useRef<Array<HTMLElement | null>>([]);
 
-  const {refs, floatingStyles, context} = useFloating<HTMLInputElement>({
+  const floating = useFloating<HTMLInputElement>({
     whileElementsMounted: autoUpdate,
     open,
     onOpenChange: setOpen,
@@ -57,6 +56,8 @@ export const Combobox = ({
     ]
   });
 
+  const {refs, context} = floating;
+
   const role = useRole(context, {role: "listbox"});
   const dismiss = useDismiss(context);
   const listNav = useListNavigation(context, {
@@ -67,11 +68,8 @@ export const Combobox = ({
     loop: true
   });
 
-  const {
-    getReferenceProps,
-    getFloatingProps,
-    getItemProps
-  } = useInteractions([role, dismiss, listNav]);
+  const interactions = useInteractions([role, dismiss, listNav]);
+  const {getReferenceProps} = interactions;
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const {value} = event.target;
@@ -100,6 +98,7 @@ export const Combobox = ({
   if (selectedItem) {
     return (
       <Button
+        className={selectedClassName}
         color='secondary'
         onClick={() => setSelectedItem(null)}
         type='button'
@@ -134,41 +133,15 @@ export const Combobox = ({
           }
         })}
       />
-      <FloatingPortal>
-        {open && (
-          <FloatingFocusManager
-            context={context}
-            initialFocus={-1}
-            visuallyHiddenDismiss
-          >
-            <div
-              {...getFloatingProps({
-                ref: refs.setFloating,
-                style: floatingStyles
-              })}
-              className={style.list}
-            >
-              {items.map((item, index) => (
-                <Item
-                  {...getItemProps({
-                    key: item.value,
-                    ref: (node) => {
-                      listRef.current[index] = node;
-                    },
-                    onClick: () => {
-                      selectItem(item);
-                      refs.domReference.current?.focus();
-                    }
-                  })}
-                  active={activeIndex === index}
-                >
-                  {item.label}
-                </Item>
-              ))}
-            </div>
-          </FloatingFocusManager>
-        )}
-      </FloatingPortal>
+      <ComboboxList
+        activeIndex={activeIndex}
+        floating={floating}
+        interactions={interactions}
+        items={items}
+        listRef={listRef}
+        open={open}
+        selectItem={selectItem}
+      />
     </>
   );
 }
