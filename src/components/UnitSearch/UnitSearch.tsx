@@ -1,4 +1,4 @@
-import React, {useCallback} from 'react';
+import React, {useCallback, useMemo} from 'react';
 import {findUnitFromUnitKeys, matchingUnitsWithPrefix, orderSearchResults} from '../../utils/unitUtils';
 import {UnitKeywords, UnitPrefixKeywords, UnitPrefixTextFn, UnitTextFn} from '../../types';
 import {Combobox} from '../Combobox';
@@ -14,6 +14,7 @@ export type UnitSearchProps = {
   unitKeywords: UnitKeywords;
   unitPrefixTextFn: UnitPrefixTextFn;
   unitTextFn: UnitTextFn;
+  value?: Unit;
 };
 
 export const UnitSearch = ({
@@ -23,6 +24,7 @@ export const UnitSearch = ({
                              unitKeywords,
                              unitPrefixTextFn,
                              unitTextFn,
+                             value,
                            }: UnitSearchProps) => {
 
   const searchResult = useCallback(
@@ -46,12 +48,20 @@ export const UnitSearch = ({
     }
   }, [onChange]);
 
+  const selected = useMemo(
+    () => value
+      ? createComboboxItem(UnitOrPrefixSearchResultItem.fromUnit(value), unitTextFn, unitPrefixTextFn)
+      : undefined,
+    [unitPrefixTextFn, unitTextFn, value]
+  );
+
   return (
     <Combobox
       onChange={handleChange}
       placeholder={placeholder}
       searchResult={searchResult}
       selectedClassName={style.selected}
+      value={selected}
     />
   );
 }

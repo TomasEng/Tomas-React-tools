@@ -1,4 +1,4 @@
-import {DimensionName} from 'enheter';
+import {DimensionName, findDimensionName, findUnitName, Unit} from 'enheter';
 import {Prefix} from 'enheter/lib/Prefix';
 import {UnitKeys} from '../types';
 
@@ -17,6 +17,13 @@ export class UnitOrPrefixSearchResultItem {
 
   public static fromUnitKeysWithPrefix<D extends DimensionName>(prefix: Prefix) {
     return (unit: UnitKeys<D>): UnitOrPrefixSearchResultItem => new UnitOrPrefixSearchResultItem(unit, prefix);
+  }
+
+  public static fromUnit(unit: Unit): UnitOrPrefixSearchResultItem {
+    const dimensionKey = findDimensionName(unit.dimension);
+    const unitKey = findUnitName(unit);
+    // @ts-ignore
+    return new UnitOrPrefixSearchResultItem({dimensionKey, unitKey}, unit.prefix);
   }
 
   public static fromPrefix(prefix: Prefix): UnitOrPrefixSearchResultItem {

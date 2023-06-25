@@ -1,4 +1,4 @@
-import React, {useRef, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import {
   autoUpdate,
   flip,
@@ -23,6 +23,7 @@ export interface ComboboxProps {
   onChange?: (value: string) => void;
   searchResult: (input: string) => ComboboxItem[];
   selectedClassName?: string;
+  value?: string | ComboboxItem;
 }
 
 export const Combobox = ({
@@ -30,11 +31,22 @@ export const Combobox = ({
                            onChange: triggerOnChange,
                            searchResult,
                            selectedClassName,
+                           value = '',
                          }: ComboboxProps) => {
   const [open, setOpen] = useState(false);
   const [inputValue, setInputValue] = useState("");
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const [selectedItem, setSelectedItem] = useState<ComboboxItem | null>(null);
+
+  useEffect(() => {
+    if (typeof value === 'string') {
+      const items = searchResult(value);
+      if (items.length === 1) setSelectedItem(items[0]);
+      else setSelectedItem(null);
+    } else if (value) {
+      setSelectedItem(value);
+    }
+  }, [searchResult, value]);
 
   const listRef = useRef<Array<HTMLElement | null>>([]);
 

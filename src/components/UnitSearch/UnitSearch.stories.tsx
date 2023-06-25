@@ -4,6 +4,7 @@ import {unitKeywords} from '../../test-data/unitKeywords';
 import {unitPrefixKeywords} from '../../test-data/unitPrefixKeywords';
 import {unitTextFn} from '../../test-data/unitTextFn';
 import {unitPrefixTextFn} from '../../test-data/unitPrefixTextFn';
+import {allUnits} from 'enheter';
 
 const meta = {
   title: 'Components/UnitSearch',
@@ -14,6 +15,12 @@ const meta = {
     // More on how to position stories at: https://storybook.js.org/docs/react/configure/story-layout
     layout: 'centered',
   },
+  argTypes: {
+    value: {
+      options: Object.keys(allUnits.length.units),
+      mapping: allUnits.length.units,
+    }
+  }
 } satisfies Meta<typeof UnitSearch>;
 type Story = StoryObj<typeof meta>;
 
@@ -23,7 +30,8 @@ export const Example: Story = {
     prefixKeywords: unitPrefixKeywords,
     unitTextFn,
     unitPrefixTextFn,
-    placeholder: "Enter a unit"
+    placeholder: "Enter a unit",
+    value: allUnits.length.units.metre,
   },
 };
 
