@@ -53,6 +53,7 @@ export const ComboboxList = ({
                   }
                 })}
                 active={activeIndex === index}
+                value={item.value}
               >
                 {item.label}
               </Item>

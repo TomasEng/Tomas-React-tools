@@ -101,6 +101,7 @@ export const Combobox = ({
         className={selectedClassName}
         color='secondary'
         onClick={() => setSelectedItem(null)}
+        role='combobox'
         type='button'
         value={selectedItem.value}
         variant='outline'

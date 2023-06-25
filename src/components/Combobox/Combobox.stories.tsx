@@ -1,8 +1,6 @@
-import React from 'react';
 import type {Meta, StoryObj} from '@storybook/react';
-import {Combobox, ComboboxItem} from './Combobox';
-import {countries} from '../../test-data/countries';
-import style from './Combobox.stories.module.css';
+import {Combobox} from './Combobox';
+import {searchResult} from './testUtils';
 
 const meta = {
   title: 'Components/Combobox',
@@ -21,9 +19,6 @@ type Story = StoryObj<typeof meta>;
 export const Example: Story = {
   args: {
     placeholder: "Enter a country",
-    searchResult: (input: string) => countries.filter((item: ComboboxItem) => item.value.toLowerCase().includes(input.toLowerCase())).map((item: ComboboxItem) => ({
-      ...item,
-      label: <span className={style.item}>{item.label}</span>
-    })),
-  },
+    searchResult,
+  }
 };
