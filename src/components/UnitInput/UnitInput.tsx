@@ -1,20 +1,41 @@
-import React, {useReducer} from 'react';
+import React, {useMemo, useReducer} from 'react';
 import {TextField} from '@digdir/design-system-react';
-import {Measure, Unit} from 'enheter';
+import {Measure} from 'enheter';
 import '@altinn/figma-design-tokens/dist/tokens.css';
 import style from './UnitInput.module.css';
 import {UnitSearch, UnitSearchProps} from '../UnitSearch';
 import {UnitInputActionType, unitInputReducer} from './UnitInputReducer';
+import {useUpdate} from '../../hooks/useUpdate';
 
 export type UnitInputProps = Omit<UnitSearchProps, 'onChange' | 'value' | 'placeholder'> & {
   searchPlaceholder?: string;
   value?: Measure;
-  onChange?: (measure: Measure) => void;
+  onChange?: (measure?: Measure) => void;
 };
 
 export const UnitInput = ({searchPlaceholder, value, onChange, ...rest}: UnitInputProps) => {
 
-  const [state, dispatch] = useReducer(unitInputReducer, {unit: undefined, measure: undefined, number: undefined});
+  const initialValue = useMemo(() => {
+    if (value) {
+      return {
+        unit: value.unit,
+        measure: value,
+        number: value.value,
+      };
+    } else {
+      return {
+        unit: undefined,
+        measure: undefined,
+        number: undefined,
+      };
+    }
+  }, [value]);
+
+  const [state, dispatch] = useReducer(unitInputReducer, initialValue);
+
+  useUpdate(() => {
+    onChange && onChange(state.measure);
+  }, [state]);
 
   return <span className={style.unitInput}>
     <span>
@@ -25,7 +46,7 @@ export const UnitInput = ({searchPlaceholder, value, onChange, ...rest}: UnitInp
       />
     </span>
     <UnitSearch
-      value={state.unit as Unit | undefined}
+      value={state.unit ?? undefined}
       onChange={(unit) => dispatch({type: UnitInputActionType.SetUnit, unit})}
       placeholder={searchPlaceholder}
       {...rest}

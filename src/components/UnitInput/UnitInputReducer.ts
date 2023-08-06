@@ -1,4 +1,4 @@
-import {length, Measure, Unit} from 'enheter';
+import {Measure, Unit} from 'enheter';
 
 export type UnitInputState = {
   unit?: Unit;
@@ -26,17 +26,17 @@ export type UnitInputAction = SetUnitAction | SetNumberAction;
 type UnitInputReducer<T extends UnitInputAction> = (state: UnitInputState, action: T) => UnitInputState;
 
 const setUnit: UnitInputReducer<SetUnitAction> = (state, action) => {
-  const newMeasure = state.measure?.copy() ?? length('metre', 0);
-  const number = state.measure?.value ?? 0;
-  newMeasure.convertTo(action.unit);
-  newMeasure.value = number;
-  return {measure: newMeasure};
+  const {number} = state;
+  const {unit} = action;
+  const newMeasure = unit && number !== undefined ? new Measure(unit, number) : undefined;
+  return {measure: newMeasure, unit, number};
 };
 
 const setNumber: UnitInputReducer<SetNumberAction> = (state, action) => {
-  const newMeasure = state.measure?.copy() ?? length('metre', 0);
-  newMeasure.value = action.number;
-  return {measure: newMeasure};
+  const {number} = action;
+  const {unit} = state;
+  const newMeasure = unit && number !== undefined ? new Measure(unit, number) : undefined;
+  return {measure: newMeasure, unit, number};
 };
 
 export const unitInputReducer: UnitInputReducer<UnitInputAction> = (state, action) => {
