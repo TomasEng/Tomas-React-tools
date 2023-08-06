@@ -12,7 +12,7 @@ export type UnitInputProps = Omit<UnitSearchProps, 'onChange' | 'value' | 'place
   onChange?: (measure: Measure) => void;
 };
 
-export const UnitInput = ({searchPlaceholder, ...rest}: UnitInputProps) => {
+export const UnitInput = ({searchPlaceholder, value, onChange, ...rest}: UnitInputProps) => {
 
   const [state, dispatch] = useReducer(unitInputReducer, {unit: undefined, measure: undefined, number: undefined});
 
