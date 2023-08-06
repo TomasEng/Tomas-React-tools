@@ -1,40 +1,34 @@
-import React, {useEffect, useState} from 'react';
+import React, {useReducer} from 'react';
 import {TextField} from '@digdir/design-system-react';
-import {Unit} from 'enheter';
+import {Measure, Unit} from 'enheter';
 import '@altinn/figma-design-tokens/dist/tokens.css';
 import style from './UnitInput.module.css';
-import {UnitSelectorButton, UnitSelectorButtonProps} from '../UnitSelectorButton';
-import {initializeUnit} from '../../utils/unitUtils';
+import {UnitSearch, UnitSearchProps} from '../UnitSearch';
+import {UnitInputActionType, unitInputReducer} from './UnitInputReducer';
 
-export type UnitInputProps = UnitSelectorButtonProps;
+export type UnitInputProps = Omit<UnitSearchProps, 'onChange' | 'value' | 'placeholder'> & {
+  searchPlaceholder?: string;
+  value?: Measure;
+  onChange?: (measure: Measure) => void;
+};
 
-export const UnitInput = ({dimension, textFn, selectedUnit, unitText, prefixText, onChange}: UnitInputProps) => {
-  const [value, setValue] = useState<number>(1);
-  const [unit, setUnit] = useState<Unit>(initializeUnit(dimension, selectedUnit));
+export const UnitInput = ({searchPlaceholder, ...rest}: UnitInputProps) => {
 
-  useEffect(() => {
-    setUnit(initializeUnit(dimension, selectedUnit));
-  }, [dimension, selectedUnit]);
-
-  useEffect(() => {
-    onChange && onChange(unit);
-  }, [onChange, unit]);
+  const [state, dispatch] = useReducer(unitInputReducer, {unit: undefined, measure: undefined, number: undefined});
 
   return <span className={style.unitInput}>
     <span>
       <TextField
         formatting={{number: {}, align: 'right'}}
-        onChange={(e) => setValue(Number(e.target.value))}
-        value={value.toString()}
+        onChange={(e) => dispatch({type: UnitInputActionType.SetNumber, number: Number(e.target.value)})}
+        value={state.number?.toString() ?? undefined}
       />
     </span>
-    <UnitSelectorButton
-      dimension={dimension}
-      onChange={setUnit}
-      prefixText={prefixText}
-      selectedUnit={unit}
-      textFn={textFn}
-      unitText={unitText}
+    <UnitSearch
+      value={state.unit as Unit | undefined}
+      onChange={(unit) => dispatch({type: UnitInputActionType.SetUnit, unit})}
+      placeholder={searchPlaceholder}
+      {...rest}
     />
   </span>;
 }

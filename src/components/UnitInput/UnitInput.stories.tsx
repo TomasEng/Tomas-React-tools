@@ -1,6 +1,9 @@
 import type {Meta, StoryObj} from '@storybook/react';
 import {UnitInput} from './UnitInput';
 import {unitTextFn} from '../../test-data/unitTextFn';
+import {unitPrefixTextFn} from '../../test-data/unitPrefixTextFn';
+import {unitKeywords} from '../../test-data/unitKeywords';
+import {unitPrefixKeywords} from '../../test-data/unitPrefixKeywords';
 
 const meta = {
   title: 'Components/UnitInput',
@@ -18,7 +21,10 @@ type Story = StoryObj<typeof meta>;
 
 export const Example: Story = {
   args: {
-    dimension: 'length',
-    textFn: unitTextFn,
+    unitPrefixTextFn,
+    unitKeywords,
+    unitTextFn,
+    prefixKeywords: unitPrefixKeywords,
+    searchPlaceholder: "Enter a unit",
   },
 };
