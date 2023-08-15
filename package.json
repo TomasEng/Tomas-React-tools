@@ -6,7 +6,7 @@
   "main": "lib/index.js",
   "dependencies": {
     "@digdir/design-system-react": "0.22.0",
-    "@floating-ui/react": "0.24.0",
+    "@floating-ui/react": "0.25.1",
     "@testing-library/jest-dom": "5.16.5",
     "@testing-library/react": "13.4.0",
     "@testing-library/user-event": "14.4.3",
