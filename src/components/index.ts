@@ -1,4 +1,5 @@
 export * from './Combobox';
+export * from './Flag';
 export * from './UnitInput';
 export * from './UnitItem';
 export * from './UnitPrefixItem';
