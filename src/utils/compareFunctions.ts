@@ -59,3 +59,21 @@ export const compareLength: CompareFunction<string> = (a, b) => a.length - b.len
  */
 export const compareMatch: SearchCompareFunction = (search) =>
   buildCompareFunction([compareMatchingCharsInOrder(search), compareMatchingRatio(search)]);
+
+/**
+ * Returns the given compare function, but applied to the given key of the objects being compared.
+ * @param key The key of the objects to compare.
+ * @param compareFunction The compare function to apply to the key.
+ * @returns The given compare function, but applied to the given key of the objects being compared.
+ */
+export const compareByKey = <T, K extends keyof T>(key: K, compareFunction: CompareFunction<T[K]>): CompareFunction<T> =>
+  (a, b) => compareFunction(a[key], b[key]);
+
+export const compareByKeys = <T, K extends keyof T>(keys: K[], compareFunction: CompareFunction<T[K]>): CompareFunction<T> =>
+  (a, b) => {
+    for (const key of keys) {
+      const compared = compareFunction(a[key], b[key]);
+      if (compared !== 0) return compared;
+    }
+    return 0;
+  };
