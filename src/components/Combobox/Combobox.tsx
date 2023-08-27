@@ -19,8 +19,9 @@ export interface ComboboxItem {
 }
 
 export interface ComboboxProps {
-  placeholder?: string;
   onChange?: (value: string) => void;
+  openOnFocus?: boolean;
+  placeholder?: string;
   searchResult: (input: string) => ComboboxItem[];
   selectedClassName?: string;
   value?: string | ComboboxItem;
@@ -29,6 +30,7 @@ export interface ComboboxProps {
 export const Combobox = ({
                            placeholder,
                            onChange: triggerOnChange,
+                           openOnFocus = false,
                            searchResult,
                            selectedClassName,
                            value = '',
@@ -131,6 +133,7 @@ export const Combobox = ({
         {...getReferenceProps({
           ref: refs.setReference,
           onChange,
+          onFocus: () => openOnFocus && setOpen(true),
           value: inputValue,
           placeholder,
           "aria-autocomplete": "list",

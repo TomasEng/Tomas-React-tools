@@ -10,12 +10,18 @@ export interface LanguagePickerProps {
   languages?: (LanguageCode | LanguageCodeWithCountryCode)[];
 }
 
-export const LanguagePicker = ({languages}: LanguagePickerProps) => {
-  const languageList: (LanguageCode | LanguageCodeWithCountryCode)[] = languages || Object.keys(allLanguages);
+export const LanguagePicker = ({languages = []}: LanguagePickerProps) => {
+  const languageList: (LanguageCode | LanguageCodeWithCountryCode)[] = languages?.length ? languages : Object.keys(allLanguages);
   return (
-    <Combobox searchResult={(search) => sortLanguagesByMatch(languageList, search).map(language => ({
-      value: language as string,
-      label: <LanguageItem language={language}/>,
-    }))}/>
+    <Combobox
+      searchResult={
+        (search) => sortLanguagesByMatch(languageList, search)
+          .map(language => ({
+            value: language as string,
+            label: <LanguageItem language={language}/>
+          }))
+      }
+      openOnFocus
+    />
   );
 };
