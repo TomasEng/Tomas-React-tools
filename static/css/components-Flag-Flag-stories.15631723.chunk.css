@@ -1,17 +1,7 @@
-.ComboboxList_list__euIov {
-    background-color: #fff;
-    border-radius: 3px;
-    border: 1px solid #68707c;
-    box-shadow: 1px 1px 3px #00000040;
-    overflow-y: auto;
-}
-.Item_item__j13cg {
-    cursor: pointer;
-    padding: 4px;
-}
-
-.Item_item__j13cg[aria-selected="true"] {
-    background-color: lightblue;
+.Flag_root__MXDNb {
+    height: 1em;
+    box-shadow: #0006 0 0 .2em 0 inset;
+    border-radius: .1em;
 }
 .other-flags_esperanto__0Y1zN {
     background-image: url(../../415c1a9c34b1c9c683f5.svg);
@@ -41,4 +31,4 @@
     background-image: url(../../66b0c3a71b4c114ad1b4.svg);
 }
 
-/*# sourceMappingURL=components-LanguagePicker-LanguagePicker-stories.0d4bb3c3.chunk.css.map*/
+/*# sourceMappingURL=components-Flag-Flag-stories.15631723.chunk.css.map*/
