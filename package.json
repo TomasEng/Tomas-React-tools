@@ -5,7 +5,8 @@
   "homepage": "http://TomasEng.github.io/Tomas-React-tools",
   "main": "lib/index.js",
   "dependencies": {
-    "@digdir/design-system-react": "0.22.0",
+    "@digdir/design-system-tokens": "0.4.2",
+    "@digdir/design-system-react": "0.23.3",
     "@floating-ui/react": "0.25.1",
     "@testing-library/jest-dom": "5.16.5",
     "@testing-library/react": "13.4.0",

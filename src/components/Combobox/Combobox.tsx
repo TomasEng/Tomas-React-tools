@@ -11,6 +11,9 @@ import {
 } from "@floating-ui/react";
 import {Button, TextField} from '@digdir/design-system-react';
 import {ComboboxList} from './ComboboxList';
+import '@digdir/design-system-tokens/brand/digdir/tokens.css';
+import style from './Combobox.module.css';
+import cn from 'classnames';
 
 export interface ComboboxItem {
   value: string;
@@ -43,7 +46,8 @@ export const Combobox = ({
   useEffect(() => {
     if (typeof value === 'string') {
       const items = searchResult(value);
-      if (items.length === 1) setSelectedItem(items[0]);
+      const newSelectedValue = items.find(item => item.value === value);
+      if (newSelectedValue) setSelectedItem(newSelectedValue);
       else setSelectedItem(null);
     } else if (value) {
       setSelectedItem(value);
@@ -112,10 +116,11 @@ export const Combobox = ({
   if (selectedItem) {
     return (
       <Button
-        className={selectedClassName}
+        className={cn(selectedClassName, style.button)}
         color='secondary'
         onClick={() => setSelectedItem(null)}
         role='combobox'
+        size='medium'
         type='button'
         value={selectedItem.value}
         variant='outline'

@@ -1,0 +1,5 @@
+.root {
+    height: 1em;
+    box-shadow: #0006 0 0 .2em 0 inset;
+    border-radius: .1em;
+}

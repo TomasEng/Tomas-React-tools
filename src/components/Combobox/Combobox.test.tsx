@@ -16,9 +16,21 @@ const defaultProps: ComboboxProps = {
 describe('Combobox', () => {
   afterEach(jest.clearAllMocks);
 
-  it('Does not show the list when user has not typed anything', () => {
+  it('Does not show the list when user has not typed anything', async () => {
     render();
     expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
+    const input = screen.getByRole('combobox');
+    await act(() => user.click(input));
+    expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
+  });
+
+  it('Shows the list on focus if openOnFocus is true', async () => {
+    render({openOnFocus: true});
+    await act(() => user.click(document.body));
+    expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
+    const input = screen.getByRole('combobox');
+    await act(() => user.click(input));
+    expect(screen.getByRole('listbox')).toBeInTheDocument();
   });
 
   it('Opens when user types something', async () => {

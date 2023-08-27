@@ -1,6 +1,7 @@
 import React from 'react';
 import "/node_modules/flag-icons/css/flag-icons.min.css";
 import cn from 'classnames';
+import style from './Flag.module.css';
 import otherFlagClasses from './other-flags.module.css';
 import {FlagCode} from '../../types/FlagCode';
 
@@ -10,7 +11,7 @@ export interface FlagProps {
 }
 
 const generateClass = (code: FlagCode, squared: boolean) => {
-  const flagIconsClasses = cn('fi', squared && 'fis');
+  const flagIconsClasses = cn(style.root, 'fi', squared && 'fis');
   switch (code) {
     case 'eo':
       return cn(flagIconsClasses, otherFlagClasses.esperanto, squared && otherFlagClasses.squared);
