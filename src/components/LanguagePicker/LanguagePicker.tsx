@@ -1,19 +1,20 @@
 import React from 'react';
-import {LanguageWithCountry} from '../../types/LanguageWithCountry';
-import {languagesWithCountry} from '../../data/languagesWithCountry';
+import {LanguageCodeWithCountryCode} from '../../types/LanguageCodeWithCountryCode';
 import {Combobox} from '../Combobox';
 import {LanguageItem} from './LanguageItem';
 import {sortLanguagesByMatch} from '../../utils/languageUtils';
+import {LanguageCode} from '../../types/LanguageCode';
+import {languages as allLanguages} from '../../data/languages';
 
 export interface LanguagePickerProps {
-  languages?: LanguageWithCountry[];
+  languages?: (LanguageCode | LanguageCodeWithCountryCode)[];
 }
 
 export const LanguagePicker = ({languages}: LanguagePickerProps) => {
-  const languageList: LanguageWithCountry[] = languages || languagesWithCountry as LanguageWithCountry[];
+  const languageList: (LanguageCode | LanguageCodeWithCountryCode)[] = languages || Object.keys(allLanguages);
   return (
     <Combobox searchResult={(search) => sortLanguagesByMatch(languageList, search).map(language => ({
-      value: language,
+      value: language as string,
       label: <LanguageItem language={language}/>,
     }))}/>
   );

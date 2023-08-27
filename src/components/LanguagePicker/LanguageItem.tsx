@@ -1,15 +1,16 @@
 import React from 'react';
-import {LanguageWithCountry} from '../../types/LanguageWithCountry';
+import {LanguageCodeWithCountryCode} from '../../types/LanguageCodeWithCountryCode';
 import {Flag} from '../Flag';
-import {extractCountryCode, getNativeName} from '../../utils/languageUtils';
+import {findFlagCodeFromLanguageCode, getNativeName} from '../../utils/languageUtils';
+import {LanguageCode} from '../../types/LanguageCode';
 
 export interface LanguageItemProps {
-  language: LanguageWithCountry;
+  language: LanguageCodeWithCountryCode | LanguageCode;
 }
 
 export const LanguageItem = ({language}: LanguageItemProps) => (
   <span>
-    <Flag country={extractCountryCode(language)}/>
+    <Flag code={findFlagCodeFromLanguageCode(language)}/>
     {getNativeName(language)}
   </span>
 );

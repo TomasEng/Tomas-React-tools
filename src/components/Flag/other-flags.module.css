@@ -1,0 +1,15 @@
+.esperanto {
+    background-image: url('../../data/additional-flags/esperanto.svg');
+}
+
+.esperanto.squared {
+    background-image: url('../../data/additional-flags/esperanto-squared.svg');
+}
+
+.sami {
+    background-image: url('../../data/additional-flags/sami.svg');
+}
+
+.sami.squared {
+    background-image: url('../../data/additional-flags/sami-squared.svg');
+}

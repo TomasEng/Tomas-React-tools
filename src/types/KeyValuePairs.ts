@@ -1,3 +1,3 @@
-export type KeyValuePairs = {
-  [key: string]: string;
+export type KeyValuePairs<V = string> = {
+  [key: string]: V;
 }

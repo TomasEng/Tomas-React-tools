@@ -1,6 +1,6 @@
 import type {Meta, StoryObj} from '@storybook/react';
 import {Flag} from './Flag';
-import {countryCodesWithNames} from '../../data/countryCodesWithNames';
+import {flagCodesWithNames} from '../../data/flagCodesWithNames';
 
 const meta = {
   title: 'Components/Flag',
@@ -10,11 +10,11 @@ const meta = {
     layout: 'centered',
   },
   argTypes: {
-    country: {
-      options: Object.keys(countryCodesWithNames),
+    code: {
+      options: Object.keys(flagCodesWithNames),
       control: {
         type: 'select',
-        labels: Object.fromEntries(Object.entries(countryCodesWithNames).map(([code, name]) => [code, `${code} (${name})`]))
+        labels: Object.fromEntries(Object.entries(flagCodesWithNames).map(([code, name]) => [code, `${code} (${name})`])),
       }
     }
   }
@@ -25,7 +25,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Example: Story = {
   args: {
-    country: 'NO',
+    code: 'no',
     squared: false,
   },
 };
