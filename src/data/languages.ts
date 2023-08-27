@@ -2,11 +2,41 @@ import {Language} from '../types/Language';
 import {KeyValuePairs} from '../types/KeyValuePairs';
 
 export const languages: KeyValuePairs<Language> = {
+  aa: {
+    code: 'aa',
+    nativeName: 'Afar',
+    countries: ['DJ', 'ER', 'ET'],
+    defaultFlag: 'dj'
+  },
+  ab: {
+    code: 'ab',
+    nativeName: 'Аҧсуа',
+    countries: ['GE'],
+    defaultFlag: 'ge'
+  },
+  ae: {
+    code: 'ae',
+    nativeName: 'Avesta',
+    countries: [],
+    defaultFlag: 'ir'
+  },
   af: {
     code: 'af',
     nativeName: 'Afrikaans',
     countries: ['ZA'],
     defaultFlag: 'za'
+  },
+  ak: {
+    code: 'ak',
+    nativeName: 'Akan',
+    countries: ['GH'],
+    defaultFlag: 'gh'
+  },
+  am: {
+    code: 'am',
+    nativeName: 'አማርኛ',
+    countries: ['ET'],
+    defaultFlag: 'et'
   },
   ar: {
     code: 'ar',
@@ -14,11 +44,41 @@ export const languages: KeyValuePairs<Language> = {
     countries: ['AE', 'BH', 'DZ', 'EG', 'IQ', 'JO', 'KW', 'LB', 'LY', 'MA', 'OM', 'QA', 'SA', 'SY', 'TN', 'YE'],
     defaultFlag: 'arab'
   },
+  as: {
+    code: 'as',
+    nativeName: 'অসমীয়া',
+    countries: ['IN'],
+    defaultFlag: 'in'
+  },
+  av: {
+    code: 'av',
+    nativeName: 'Авар',
+    countries: ['RU'],
+    defaultFlag: 'ru'
+  },
+  ay: {
+    code: 'ay',
+    nativeName: 'Aymar',
+    countries: ['BO'],
+    defaultFlag: 'bo'
+  },
   az: {
     code: 'az',
     nativeName: 'Azərbaycan dili',
     countries: ['AZ'],
     defaultFlag: 'az'
+  },
+  ba: {
+    code: 'ba',
+    nativeName: 'Башҡорт',
+    countries: ['RU'],
+    defaultFlag: 'ru'
+  },
+  bm: {
+    code: 'bm',
+    nativeName: 'Bamanankan',
+    countries: ['ML'],
+    defaultFlag: 'ml'
   },
   be: {
     code: 'be',
@@ -32,11 +92,35 @@ export const languages: KeyValuePairs<Language> = {
     countries: ['BG'],
     defaultFlag: 'bg'
   },
+  bh: {
+    code: 'bh',
+    nativeName: 'भोजपुरी',
+    countries: ['IN'],
+    defaultFlag: 'in'
+  },
+  bi: {
+    code: 'bi',
+    nativeName: 'Bislama',
+    countries: ['VU'],
+    defaultFlag: 'vu'
+  },
   bn: {
     code: 'bn',
     nativeName: 'বাংলা',
     countries: ['BD', 'IN'],
     defaultFlag: 'bd'
+  },
+  bo: {
+    code: 'bo',
+    nativeName: 'བོད་ཡིག',
+    countries: ['BT'],
+    defaultFlag: 'bt'
+  },
+  br: {
+    code: 'br',
+    nativeName: 'Brezhoneg',
+    countries: ['FR'],
+    defaultFlag: 'fr'
   },
   bs: {
     code: 'bs',
@@ -51,11 +135,47 @@ export const languages: KeyValuePairs<Language> = {
     overrideFlag: {ES: 'es-ct'},
     defaultFlag: 'es-ct'
   },
+  ce: {
+    code: 'ce',
+    nativeName: 'Нохчийн',
+    countries: ['RU'],
+    defaultFlag: 'ru'
+  },
+  ch: {
+    code: 'ch',
+    nativeName: 'Chamoru',
+    countries: ['GU'],
+    defaultFlag: 'gu'
+  },
+  co: {
+    code: 'co',
+    nativeName: 'Corsu',
+    countries: ['FR'],
+    defaultFlag: 'fr'
+  },
+  cr: {
+    code: 'cr',
+    nativeName: 'Nehiyaw',
+    countries: ['CA'],
+    defaultFlag: 'ca'
+  },
   cs: {
     code: 'cs',
     nativeName: 'Čeština',
     countries: ['CZ'],
     defaultFlag: 'cz'
+  },
+  cu: {
+    code: 'cu',
+    nativeName: 'Словѣньскъ',
+    countries: ['RU'],
+    defaultFlag: 'ru'
+  },
+  cv: {
+    code: 'cv',
+    nativeName: 'Чăваш',
+    countries: ['RU'],
+    defaultFlag: 'ru'
   },
   cy: {
     code: 'cy',
@@ -81,6 +201,18 @@ export const languages: KeyValuePairs<Language> = {
     nativeName: 'ދިވެހިބަސް',
     countries: ['MV'],
     defaultFlag: 'mv'
+  },
+  dz: {
+    code: 'dz',
+    nativeName: 'རྫོང་ཁ',
+    countries: ['BT'],
+    defaultFlag: 'bt'
+  },
+  ee: {
+    code: 'ee',
+    nativeName: 'Eʋegbe',
+    countries: ['GH', 'TG'],
+    defaultFlag: 'gh'
   },
   el: {
     code: 'el',
@@ -125,6 +257,12 @@ export const languages: KeyValuePairs<Language> = {
     nativeName: 'فارسی',
     countries: ['IR'],
     defaultFlag: 'ir'
+  },
+  ff: {
+    code: 'ff',
+    nativeName: 'Fulfulde',
+    countries: ['SN'],
+    defaultFlag: 'sn'
   },
   fi: {
     code: 'fi',
@@ -188,6 +326,18 @@ export const languages: KeyValuePairs<Language> = {
     countries: ['IN'],
     defaultFlag: 'in'
   },
+  gv: {
+    code: 'gv',
+    nativeName: 'Gaelg',
+    countries: ['IM'],
+    defaultFlag: 'im'
+  },
+  ha: {
+    code: 'ha',
+    nativeName: 'هَوُسَ',
+    countries: ['NG'],
+    defaultFlag: 'ng'
+  },
   he: {
     code: 'he',
     nativeName: 'עברית',
@@ -200,11 +350,23 @@ export const languages: KeyValuePairs<Language> = {
     countries: ['IN'],
     defaultFlag: 'in'
   },
+  ho: {
+    code: 'ho',
+    nativeName: 'Hiri Motu',
+    countries: ['PG'],
+    defaultFlag: 'pg'
+  },
   hr: {
     code: 'hr',
     nativeName: 'Hrvatski',
     countries: ['BA', 'HR'],
     defaultFlag: 'hr'
+  },
+  ht: {
+    code: 'ht',
+    nativeName: 'Kreyòl',
+    countries: ['HT'],
+    defaultFlag: 'ht'
   },
   hu: {
     code: 'hu',
@@ -224,6 +386,31 @@ export const languages: KeyValuePairs<Language> = {
     countries: ['ID'],
     defaultFlag: 'id'
   },
+  ii: {
+    code: 'ii',
+    nativeName: 'ꆈꌠ꒿ Nuosuhxop',
+    countries: ['CN'],
+    defaultFlag: 'cn'
+  },
+  ig: {
+    code: 'ig',
+    nativeName: 'Igbo',
+    countries: ['NG'],
+    defaultFlag: 'ng'
+  },
+  ik: {
+    code: 'ik',
+    nativeName: 'Iñupiak',
+    countries: ['US'],
+    defaultFlag: 'us'
+  },
+  io: {
+    code: 'io',
+    nativeName: 'Ido',
+    countries: [],
+    overrideFlag: 'ido',
+    defaultFlag: 'ido'
+  },
   is: {
     code: 'is',
     nativeName: 'Íslenska',
@@ -236,17 +423,47 @@ export const languages: KeyValuePairs<Language> = {
     countries: ['CH', 'IT'],
     defaultFlag: 'it'
   },
+  iu: {
+    code: 'iu',
+    nativeName: 'ᐃᓄᒃᑎᑐᑦ',
+    countries: ['CA'],
+    defaultFlag: 'ca'
+  },
   ja: {
     code: 'ja',
     nativeName: '日本語',
     countries: ['JP'],
     defaultFlag: 'jp'
   },
+  jv: {
+    code: 'jv',
+    nativeName: 'Basa Jawa',
+    countries: ['ID'],
+    defaultFlag: 'id'
+  },
   ka: {
     code: 'ka',
     nativeName: 'ქართული',
     countries: ['GE'],
     defaultFlag: 'ge'
+  },
+  kg: {
+    code: 'kg',
+    nativeName: 'KiKongo',
+    countries: ['CG'],
+    defaultFlag: 'cg'
+  },
+  ki: {
+    code: 'ki',
+    nativeName: 'Gĩkũyũ',
+    countries: ['KE'],
+    defaultFlag: 'ke'
+  },
+  kj: {
+    code: 'kj',
+    nativeName: 'Kuanyama',
+    countries: ['NA'],
+    defaultFlag: 'na'
   },
   kk: {
     code: 'kk',
@@ -284,17 +501,72 @@ export const languages: KeyValuePairs<Language> = {
     countries: ['IN'],
     defaultFlag: 'in'
   },
+  kr: {
+    code: 'kr',
+    nativeName: 'Kanuri',
+    countries: ['NE'],
+    defaultFlag: 'ne'
+  },
+  ks: {
+    code: 'ks',
+    nativeName: 'कश्मीरी',
+    countries: ['IN'],
+    defaultFlag: 'in'
+  },
+  ku: {
+    code: 'ku',
+    nativeName: 'Kurdî',
+    countries: ['TR'],
+    defaultFlag: 'tr'
+  },
+  kv: {
+    code: 'kv',
+    nativeName: 'Коми',
+    countries: ['RU'],
+    defaultFlag: 'ru'
+  },
+  kw: {
+    code: 'kw',
+    nativeName: 'Kernewek',
+    countries: ['GB'],
+    overrideFlag: 'gb-eng',
+    defaultFlag: 'gb-eng'
+  },
   ky: {
     code: 'ky',
     nativeName: 'Кыргыз',
     countries: ['KG'],
     defaultFlag: 'kg'
   },
+  la: {
+    code: 'la',
+    nativeName: 'Latina',
+    countries: ['VA'],
+    defaultFlag: 'va'
+  },
   lb: {
     code: 'lb',
     nativeName: 'Lëtzebuergesch',
     countries: ['LU'],
     defaultFlag: 'lu'
+  },
+  lg: {
+    code: 'lg',
+    nativeName: 'Luganda',
+    countries: ['UG'],
+    defaultFlag: 'ug'
+  },
+  li: {
+    code: 'li',
+    nativeName: 'Limburgs',
+    countries: ['BE', 'NL'],
+    defaultFlag: 'nl'
+  },
+  ln: {
+    code: 'ln',
+    nativeName: 'Lingála',
+    countries: ['CD'],
+    defaultFlag: 'cd'
   },
   lo: {
     code: 'lo',
@@ -308,11 +580,23 @@ export const languages: KeyValuePairs<Language> = {
     countries: ['LT'],
     defaultFlag: 'lt'
   },
+  lu: {
+    code: 'lu',
+    nativeName: 'Tshiluba',
+    countries: ['CD'],
+    defaultFlag: 'cd'
+  },
   lv: {
     code: 'lv',
     nativeName: 'Latviešu',
     countries: ['LV'],
     defaultFlag: 'lv'
+  },
+  mg: {
+    code: 'mg',
+    nativeName: 'Malagasy',
+    countries: ['MG'],
+    defaultFlag: 'mg'
   },
   mi: {
     code: 'mi',
@@ -356,11 +640,41 @@ export const languages: KeyValuePairs<Language> = {
     countries: ['MT'],
     defaultFlag: 'mt'
   },
+  my: {
+    code: 'my',
+    nativeName: 'ဗမာ',
+    countries: ['MM'],
+    defaultFlag: 'mm'
+  },
+  na: {
+    code: 'na',
+    nativeName: 'Dorerin Naoero',
+    countries: ['NR'],
+    defaultFlag: 'nr'
+  },
   nb: {
     code: 'nb',
     nativeName: 'Norsk bokmål',
     countries: ['NO'],
     defaultFlag: 'no'
+  },
+  nd: {
+    code: 'nd',
+    nativeName: 'isiNdebele',
+    countries: ['ZW'],
+    defaultFlag: 'zw'
+  },
+  ne: {
+    code: 'ne',
+    nativeName: 'नेपाली',
+    countries: ['NP'],
+    defaultFlag: 'np'
+  },
+  ng: {
+    code: 'ng',
+    nativeName: 'Oshiwambo',
+    countries: ['NA'],
+    defaultFlag: 'na'
   },
   nl: {
     code: 'nl',
@@ -374,15 +688,76 @@ export const languages: KeyValuePairs<Language> = {
     countries: ['NO'],
     defaultFlag: 'no'
   },
+  no: {
+    code: 'no',
+    nativeName: 'Norsk',
+    countries: ['NO'],
+    defaultFlag: 'no'
+  },
+  nr: {
+    code: 'nr',
+    nativeName: 'isiNdebele',
+    countries: ['ZA'],
+    defaultFlag: 'za'
+  },
   ns: {
     code: 'ns',
     nativeName: 'Sesotho sa Leboa',
     countries: ['ZA'],
     defaultFlag: 'za'
   },
+  nv: {
+    code: 'nv',
+    nativeName: 'Diné bizaad',
+    countries: ['US'],
+    defaultFlag: 'us'
+  },
+  ny: {
+    code: 'ny',
+    nativeName: 'ChiCheŵa',
+    countries: ['MW'],
+    defaultFlag: 'mw'
+  },
+  oc: {
+    code: 'oc',
+    nativeName: 'Occitan',
+    countries: ['FR'],
+    defaultFlag: 'oc',
+    overrideFlag: 'oc'
+  },
+  oj: {
+    code: 'oj',
+    nativeName: 'ᐊᓂᔑᓈᐯᒧᐎᓐ',
+    countries: ['CA'],
+    defaultFlag: 'ca'
+  },
+  om: {
+    code: 'om',
+    nativeName: 'Oromoo',
+    countries: ['ET'],
+    defaultFlag: 'et'
+  },
+  or: {
+    code: 'or',
+    nativeName: 'ଓଡ଼ିଆ',
+    countries: ['IN'],
+    defaultFlag: 'in'
+  },
+  os: {
+    code: 'os',
+    nativeName: 'Иронау',
+    countries: ['RU'],
+    defaultFlag: 'ru'
+  },
   pa: {
     code: 'pa',
     nativeName: 'ਪੰਜਾਬੀ',
+    countries: ['IN'],
+    defaultFlag: 'in'
+  },
+  pi: {
+    code: 'pi',
+    nativeName: 'पाऴि',
     countries: ['IN'],
     defaultFlag: 'in'
   },
@@ -416,6 +791,12 @@ export const languages: KeyValuePairs<Language> = {
     countries: ['CH'],
     defaultFlag: 'ch'
   },
+  rn: {
+    code: 'rn',
+    nativeName: 'Kirundi',
+    countries: ['BI'],
+    defaultFlag: 'bi'
+  },
   ro: {
     code: 'ro',
     nativeName: 'Română',
@@ -440,6 +821,18 @@ export const languages: KeyValuePairs<Language> = {
     countries: ['IN'],
     defaultFlag: 'in'
   },
+  sc: {
+    code: 'sc',
+    nativeName: 'Sardu',
+    countries: ['IT'],
+    defaultFlag: 'it'
+  },
+  sd: {
+    code: 'sd',
+    nativeName: 'सिनधि',
+    countries: ['IN'],
+    defaultFlag: 'in'
+  },
   se: {
     code: 'se',
     nativeName: 'Davvisámegiella',
@@ -447,19 +840,11 @@ export const languages: KeyValuePairs<Language> = {
     overrideFlag: 'sami',
     defaultFlag: 'sami'
   },
-  smj: {
-    code: 'smj',
-    nativeName: 'Julevsámegiella',
-    countries: ['NO', 'SE'],
-    overrideFlag: 'sami',
-    defaultFlag: 'sami'
-  },
-  smn: {
-    code: 'smn',
-    nativeName: 'Anarâškielâ',
-    countries: ['FI'],
-    overrideFlag: 'sami',
-    defaultFlag: 'sami'
+  sg: {
+    code: 'sg',
+    nativeName: 'Sängö',
+    countries: ['CF'],
+    defaultFlag: 'cf'
   },
   si: {
     code: 'si',
@@ -479,6 +864,38 @@ export const languages: KeyValuePairs<Language> = {
     countries: ['SI'],
     defaultFlag: 'si'
   },
+  sm: {
+    code: 'sm',
+    nativeName: 'Gagana Samoa',
+    countries: ['WS'],
+    defaultFlag: 'ws'
+  },
+  smj: {
+    code: 'smj',
+    nativeName: 'Julevsámegiella',
+    countries: ['NO', 'SE'],
+    overrideFlag: 'sami',
+    defaultFlag: 'sami'
+  },
+  smn: {
+    code: 'smn',
+    nativeName: 'Anarâškielâ',
+    countries: ['FI'],
+    overrideFlag: 'sami',
+    defaultFlag: 'sami'
+  },
+  sn: {
+    code: 'sn',
+    nativeName: 'chiShona',
+    countries: ['ZW'],
+    defaultFlag: 'zw'
+  },
+  so: {
+    code: 'so',
+    nativeName: 'Soomaaliga',
+    countries: ['DJ', 'ET', 'KE', 'SO'],
+    defaultFlag: 'so'
+  },
   sq: {
     code: 'sq',
     nativeName: 'Shqip',
@@ -490,6 +907,24 @@ export const languages: KeyValuePairs<Language> = {
     nativeName: 'Српски',
     countries: ['BA', 'ME', 'RS'],
     defaultFlag: 'rs'
+  },
+  ss: {
+    code: 'ss',
+    nativeName: 'SiSwati',
+    countries: ['SZ', 'ZA'],
+    defaultFlag: 'sz'
+  },
+  st: {
+    code: 'st',
+    nativeName: 'Sesotho',
+    countries: ['LS', 'ZA'],
+    defaultFlag: 'ls'
+  },
+  su: {
+    code: 'su',
+    nativeName: 'Basa Sunda',
+    countries: ['ID'],
+    defaultFlag: 'id'
   },
   sv: {
     code: 'sv',
@@ -521,11 +956,29 @@ export const languages: KeyValuePairs<Language> = {
     countries: ['IN'],
     defaultFlag: 'in'
   },
+  tg: {
+    code: 'tg',
+    nativeName: 'Тоҷикӣ',
+    countries: ['TJ'],
+    defaultFlag: 'tj'
+  },
   th: {
     code: 'th',
     nativeName: 'ไทย',
     countries: ['TH'],
     defaultFlag: 'th'
+  },
+  ti: {
+    code: 'ti',
+    nativeName: 'ትግርኛ',
+    countries: ['ER', 'ET'],
+    defaultFlag: 'er'
+  },
+  tk: {
+    code: 'tk',
+    nativeName: 'Türkmençe',
+    countries: ['TM'],
+    defaultFlag: 'tm'
   },
   tl: {
     code: 'tl',
@@ -538,6 +991,12 @@ export const languages: KeyValuePairs<Language> = {
     nativeName: 'Setswana',
     countries: ['BW', 'ZA'],
     defaultFlag: 'bw'
+  },
+  to: {
+    code: 'to',
+    nativeName: 'Lea Faka-Tonga',
+    countries: ['TO'],
+    defaultFlag: 'to'
   },
   tr: {
     code: 'tr',
@@ -557,6 +1016,24 @@ export const languages: KeyValuePairs<Language> = {
     countries: ['RU'],
     defaultFlag: 'ru'
   },
+  tw: {
+    code: 'tw',
+    nativeName: 'Twi',
+    countries: ['GH'],
+    defaultFlag: 'gh'
+  },
+  ty: {
+    code: 'ty',
+    nativeName: 'Reo Mā`ohi',
+    countries: ['PF'],
+    defaultFlag: 'pf'
+  },
+  ug: {
+    code: 'ug',
+    nativeName: 'Uyƣurqə',
+    countries: ['CN'],
+    defaultFlag: 'cn'
+  },
   uk: {
     code: 'uk',
     nativeName: 'Українська',
@@ -575,17 +1052,53 @@ export const languages: KeyValuePairs<Language> = {
     countries: ['UZ'],
     defaultFlag: 'uz'
   },
+  ve: {
+    code: 've',
+    nativeName: 'Tshivenḓa',
+    countries: ['ZA'],
+    defaultFlag: 'za'
+  },
   vi: {
     code: 'vi',
     nativeName: 'Tiếng Việt',
     countries: ['VN'],
     defaultFlag: 'vn'
   },
+  wa: {
+    code: 'wa',
+    nativeName: 'Walon',
+    countries: ['BE'],
+    defaultFlag: 'be'
+  },
+  wo: {
+    code: 'wo',
+    nativeName: 'Wollof',
+    countries: ['SN'],
+    defaultFlag: 'sn'
+  },
   xh: {
     code: 'xh',
     nativeName: 'isiXhosa',
     countries: ['ZA'],
     defaultFlag: 'za'
+  },
+  yi: {
+    code: 'yi',
+    nativeName: 'ייִדיש',
+    countries: ['IL'],
+    defaultFlag: 'il'
+  },
+  yo: {
+    code: 'yo',
+    nativeName: 'Yorùbá',
+    countries: ['NG'],
+    defaultFlag: 'ng'
+  },
+  za: {
+    code: 'za',
+    nativeName: 'Cuengh',
+    countries: ['CN'],
+    defaultFlag: 'cn'
   },
   zh: {
     code: 'zh',

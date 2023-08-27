@@ -14,6 +14,10 @@ const generateClass = (code: FlagCode, squared: boolean) => {
   switch (code) {
     case 'eo':
       return cn(flagIconsClasses, otherFlagClasses.esperanto, squared && otherFlagClasses.squared);
+    case 'ido':
+      return cn(flagIconsClasses, otherFlagClasses.ido, squared && otherFlagClasses.squared);
+    case 'oc':
+      return cn(flagIconsClasses, otherFlagClasses.occitania, squared && otherFlagClasses.squared);
     case 'sami':
       return cn(flagIconsClasses, otherFlagClasses.sami, squared && otherFlagClasses.squared);
     default:

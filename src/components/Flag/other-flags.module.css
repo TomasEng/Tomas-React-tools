@@ -6,6 +6,18 @@
     background-image: url('../../data/additional-flags/esperanto-squared.svg');
 }
 
+.ido {
+    background-image: url('../../data/additional-flags/ido.svg');
+}
+
+.ido.squared {
+    background-image: url('../../data/additional-flags/ido-squared.svg');
+}
+
+.occitania {
+    background-image: url('../../data/additional-flags/occitania.svg');
+}
+
 .sami {
     background-image: url('../../data/additional-flags/sami.svg');
 }
