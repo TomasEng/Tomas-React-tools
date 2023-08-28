@@ -42,13 +42,16 @@ export const Combobox = ({
   const [inputValue, setInputValue] = useState("");
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const [selectedItem, setSelectedItem] = useState<ComboboxItem | null>(null);
+  const [writeMode, setWriteMode] = useState(false);
 
   useEffect(() => {
     if (typeof value === 'string') {
       const items = searchResult(value);
       const newSelectedValue = items.find(item => item.value === value);
-      if (newSelectedValue) setSelectedItem(newSelectedValue);
-      else setSelectedItem(null);
+      if (newSelectedValue) {
+        setSelectedItem(newSelectedValue);
+        setWriteMode(false);
+      }
     } else if (value) {
       setSelectedItem(value);
     }
@@ -59,7 +62,10 @@ export const Combobox = ({
   const floating = useFloating<HTMLInputElement>({
     whileElementsMounted: autoUpdate,
     open,
-    onOpenChange: setOpen,
+    onOpenChange: newOpenState => {
+      setOpen(newOpenState);
+      if (!newOpenState) setWriteMode(false);
+    },
     middleware: [
       flip({padding: 10}),
       size({
@@ -108,17 +114,18 @@ export const Combobox = ({
     } else {
       setInputValue('');
       setSelectedItem(item);
+      setWriteMode(false);
       triggerOnChange && triggerOnChange(item.value);
     }
     setOpen(false);
   }
 
-  if (selectedItem) {
+  if (!writeMode && selectedItem) {
     return (
       <Button
         className={cn(selectedClassName, style.button)}
         color='secondary'
-        onClick={() => setSelectedItem(null)}
+        onClick={() => setWriteMode(true)}
         role='combobox'
         size='medium'
         type='button'

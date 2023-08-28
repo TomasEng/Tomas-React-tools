@@ -63,6 +63,21 @@ describe('Combobox', () => {
     await act(() => user.click(screen.getByRole('combobox')));
     expect(screen.getByRole('combobox')).toHaveValue('');
   });
+
+  it('Renders with given selected value', () => {
+    const value = 'Norway';
+    render({value});
+    expect(screen.getByRole('combobox')).toHaveValue(value);
+  });
+
+  it('Keeps old selection if the field is blurred', async () => {
+    const value = 'Norway';
+    render({value});
+    const input = screen.getByRole('combobox');
+    await act(() => user.type(input, 'a'));
+    await act(() => user.tab());
+    expect(input).toHaveValue(value);
+  });
 });
 
 const render = (props: Partial<ComboboxProps> = {}) =>
