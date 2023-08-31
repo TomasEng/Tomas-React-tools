@@ -27,7 +27,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "tsc",
-    "postbuild": "copyfiles --error --up 1 ./src/**/*.css ./lib",
+    "postbuild": "copyfiles --error --up 1 src/**/*.css lib",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "storybook": "storybook dev -p 6006",
