@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from "react";
+import React, {useEffect, useMemo, useReducer, useRef} from "react";
 import {
   autoUpdate,
   flip,
@@ -14,21 +14,9 @@ import {ComboboxList} from './ComboboxList';
 import '@digdir/design-system-tokens/brand/digdir/tokens.css';
 import style from './Combobox.module.css';
 import cn from 'classnames';
-
-export interface ComboboxItem {
-  value: string;
-  label: React.ReactNode;
-  searchString?: string;
-}
-
-export interface ComboboxProps {
-  onChange?: (value: string) => void;
-  openOnFocus?: boolean;
-  placeholder?: string;
-  searchResult: (input: string) => ComboboxItem[];
-  selectedClassName?: string;
-  value?: string | ComboboxItem;
-}
+import {ComboboxProps} from './types/ComboboxProps';
+import {ComboboxItem} from './types/ComboboxItem';
+import {ComboboxActionType, comboboxReducer} from './ComboboxReducer';
 
 export const Combobox = ({
                            placeholder,
@@ -38,34 +26,34 @@ export const Combobox = ({
                            selectedClassName,
                            value = '',
                          }: ComboboxProps) => {
-  const [open, setOpen] = useState(false);
-  const [inputValue, setInputValue] = useState("");
-  const [activeIndex, setActiveIndex] = useState<number | null>(null);
-  const [selectedItem, setSelectedItem] = useState<ComboboxItem | null>(null);
-  const [writeMode, setWriteMode] = useState(false);
 
-  useEffect(() => {
+  const selectedItemFromProps: ComboboxItem | null = useMemo(() => {
     if (typeof value === 'string') {
       const items = searchResult(value);
-      const newSelectedValue = items.find(item => item.value === value);
-      if (newSelectedValue) {
-        setSelectedItem(newSelectedValue);
-        setWriteMode(false);
-      }
-    } else if (value) {
-      setSelectedItem(value);
-    }
+      return items.find(item => item.value === value) ?? null;
+    } else return value;
   }, [searchResult, value]);
+
+  const [state, dispatch] = useReducer(comboboxReducer, {
+    activeIndex: null,
+    inputValue: '',
+    isInWriteMode: false,
+    isOpen: false,
+    selectedItem: selectedItemFromProps,
+  });
+
+  useEffect(() => {
+    if (selectedItemFromProps) {
+      dispatch({type: ComboboxActionType.SelectItem, item: selectedItemFromProps});
+    }
+  }, [selectedItemFromProps]);
 
   const listRef = useRef<Array<HTMLElement | null>>([]);
 
   const floating = useFloating<HTMLInputElement>({
     whileElementsMounted: autoUpdate,
-    open,
-    onOpenChange: newOpenState => {
-      setOpen(newOpenState);
-      if (!newOpenState) setWriteMode(false);
-    },
+    open: state.isOpen,
+    onOpenChange: newOpenState => dispatch({type: ComboboxActionType.OpenOrClose, newOpenState}),
     middleware: [
       flip({padding: 10}),
       size({
@@ -86,8 +74,8 @@ export const Combobox = ({
   const dismiss = useDismiss(context);
   const listNav = useListNavigation(context, {
     listRef,
-    activeIndex,
-    onNavigate: setActiveIndex,
+    activeIndex: state.activeIndex,
+    onNavigate: newActiveIndex => dispatch({type: ComboboxActionType.SetActiveIndex, newActiveIndex}),
     virtual: true,
     loop: true
   });
@@ -97,42 +85,29 @@ export const Combobox = ({
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const {value} = event.target;
-    setInputValue(value);
-    if (value) {
-      setOpen(true);
-      setActiveIndex(0);
-    } else {
-      setOpen(false);
-    }
+    dispatch({type: ComboboxActionType.ChangeInputValue, newInputValue: value, closeWhenEmpty: !openOnFocus});
   }
 
-  const items = searchResult(inputValue);
+  const items = searchResult(state.inputValue);
 
   const selectItem = (item: ComboboxItem) => {
-    if (item.searchString) {
-      setInputValue(item.searchString);
-    } else {
-      setInputValue('');
-      setSelectedItem(item);
-      setWriteMode(false);
-      triggerOnChange && triggerOnChange(item.value);
-    }
-    setOpen(false);
-  }
+    dispatch({type: ComboboxActionType.SelectItem, item});
+    triggerOnChange?.(item.value);
+  };
 
-  if (!writeMode && selectedItem) {
+  if (!state.isInWriteMode && state.selectedItem) {
     return (
       <Button
         className={cn(selectedClassName, style.button)}
         color='secondary'
-        onClick={() => setWriteMode(true)}
+        onClick={() => dispatch({type: ComboboxActionType.ActivateWriteMode, openImmediately: openOnFocus})}
         role='combobox'
         size='medium'
         type='button'
-        value={selectedItem.value}
+        value={state.selectedItem.value}
         variant='outline'
       >
-        {selectedItem.label}
+        {state.selectedItem.label}
       </Button>
     );
   }
@@ -145,29 +120,29 @@ export const Combobox = ({
         {...getReferenceProps({
           ref: refs.setReference,
           onChange,
-          onFocus: () => openOnFocus && setOpen(true),
-          value: inputValue,
+          onFocus: () => openOnFocus && dispatch({type: ComboboxActionType.OpenOrClose, newOpenState: true}),
+          value: state.inputValue,
           placeholder,
           "aria-autocomplete": "list",
           onKeyDown(event) {
             if (
               event.key === "Enter" &&
-              activeIndex != null &&
-              items[activeIndex]
+              state.activeIndex != null &&
+              items[state.activeIndex]
             ) {
-              selectItem(items[activeIndex]);
-              setActiveIndex(null);
+              selectItem(items[state.activeIndex]);
+              dispatch({type: ComboboxActionType.SetActiveIndex, newActiveIndex: null});
             }
           }
         })}
       />
       <ComboboxList
-        activeIndex={activeIndex}
+        activeIndex={state.activeIndex}
         floating={floating}
         interactions={interactions}
         items={items}
         listRef={listRef}
-        open={open}
+        open={state.isOpen}
         selectItem={selectItem}
       />
     </>

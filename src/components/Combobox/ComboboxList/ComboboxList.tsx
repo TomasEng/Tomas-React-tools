@@ -2,9 +2,9 @@ import React, {MutableRefObject} from 'react';
 import {FloatingFocusManager, FloatingPortal, UseFloatingReturn, useInteractions} from '@floating-ui/react';
 import style from './ComboboxList.module.css';
 import {Item} from './Item';
-import {ComboboxItem} from './Combobox';
+import {ComboboxItem} from '../Combobox';
 
-interface ComboboxListProps {
+export interface ComboboxListProps {
   activeIndex: number | null;
   floating: UseFloatingReturn<HTMLInputElement>;
   interactions: ReturnType<typeof useInteractions>;

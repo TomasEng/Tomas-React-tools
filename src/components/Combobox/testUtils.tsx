@@ -1,7 +1,7 @@
 import {countries} from '../../test-data/countries';
-import {ComboboxItem} from './Combobox';
 import style from './Combobox.stories.module.css';
 import React from 'react';
+import {ComboboxItem} from './types/ComboboxItem';
 
 export const searchResult = (input: string) => countries
   .filter((item: ComboboxItem) => item.value.toLowerCase().includes(input.toLowerCase()))

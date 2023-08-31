@@ -1,8 +1,9 @@
 import React from 'react';
-import {Combobox, ComboboxProps} from './Combobox';
+import {Combobox} from './Combobox';
 import {searchResult} from './testUtils';
 import {act, render as renderRtl, screen} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import {ComboboxProps} from './types/ComboboxProps';
 
 const user = userEvent.setup();
 
