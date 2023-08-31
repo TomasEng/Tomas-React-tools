@@ -1,7 +1,7 @@
 {
   "name": "tomas-react-tools",
   "description": "Tomas' React tools",
-  "version": "0.1.29",
+  "version": "0.1.30",
   "homepage": "http://TomasEng.github.io/Tomas-React-tools",
   "main": "lib/index.js",
   "dependencies": {
