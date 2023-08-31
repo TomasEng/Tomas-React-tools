@@ -1,16 +1,16 @@
-.ComboboxList_list__euIov {
+.ComboboxList_list__m4nqN {
     background-color: #fff;
     border-radius: 3px;
     border: 1px solid #68707c;
     box-shadow: 1px 1px 3px #00000040;
     overflow-y: auto;
 }
-.Item_item__j13cg {
+.Item_item__0\+3DA {
     cursor: pointer;
     padding: 4px;
 }
 
-.Item_item__j13cg[aria-selected="true"] {
+.Item_item__0\+3DA[aria-selected="true"] {
     background-color: lightblue;
 }
 /**
@@ -267,12 +267,25 @@
     height: 2.25rem;
     width: 100%;
 }
-body {
-    font-family: Inter, Arial, Helvetica, sans-serif;
-}
-.Combobox_stories_item__U-A3M {
+.UnitItem_root__h076S {
     display: inline-flex;
     flex-direction: column;
+    text-align: left;
 }
 
-/*# sourceMappingURL=components-Combobox-Combobox-stories.59d4fbcb.chunk.css.map*/
+.UnitItem_unit__Ndkxa {
+    font-size: 1rem;
+}
+
+.UnitItem_dimension__b1NKZ {
+    font-size: 0.8rem;
+    color: #666;
+}
+.UnitSearch_selected__u0Zlc {
+    padding-left: 3px;
+    padding-right: 3px;
+    text-align: left;
+    width: 100%;
+}
+
+/*# sourceMappingURL=components-UnitSearch-UnitSearch-stories.3b7163c5.chunk.css.map*/

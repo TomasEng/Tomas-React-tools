@@ -9,19 +9,19 @@
 .UnitInput_unitInput__rdQhG > * {
     flex: 1 1;
 }
-.ComboboxList_list__euIov {
+.ComboboxList_list__m4nqN {
     background-color: #fff;
     border-radius: 3px;
     border: 1px solid #68707c;
     box-shadow: 1px 1px 3px #00000040;
     overflow-y: auto;
 }
-.Item_item__j13cg {
+.Item_item__0\+3DA {
     cursor: pointer;
     padding: 4px;
 }
 
-.Item_item__j13cg[aria-selected="true"] {
+.Item_item__0\+3DA[aria-selected="true"] {
     background-color: lightblue;
 }
 /**
@@ -299,4 +299,4 @@
     width: 100%;
 }
 
-/*# sourceMappingURL=components-UnitInput-UnitInput-stories.cf673a77.chunk.css.map*/
+/*# sourceMappingURL=components-UnitInput-UnitInput-stories.85a3b8a0.chunk.css.map*/
