@@ -1,7 +1,7 @@
 {
   "name": "tomas-react-tools",
   "description": "Tomas' React tools",
-  "version": "0.1.36",
+  "version": "0.1.35",
   "homepage": "http://TomasEng.github.io/Tomas-React-tools",
   "main": "lib/index.js",
   "dependencies": {
@@ -27,7 +27,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "tsc",
-    "postbuild": "copyfiles --error src/**/*.css src/**/*.svg lib",
+    "postbuild": "copyfiles --error --up 1 src/**/*.css src/**/*.svg lib",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "storybook": "storybook dev -p 6006",
