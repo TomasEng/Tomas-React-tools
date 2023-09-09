@@ -35,6 +35,7 @@
     "predeploy": "npm run build-storybook",
     "deploy-storybook": "gh-pages -d storybook-static"
   },
+  "//": "Todo: Find out why copopyfiles does not work in Github Actions",
   "eslintConfig": {
     "extends": [
       "react-app",

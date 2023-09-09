@@ -102,7 +102,7 @@ export const Combobox = ({
         color='secondary'
         onClick={() => dispatch({type: ComboboxActionType.ActivateWriteMode, openImmediately: openOnFocus})}
         role='combobox'
-        size='medium'
+        size='small'
         type='button'
         value={state.selectedItem.value}
         variant='outline'
