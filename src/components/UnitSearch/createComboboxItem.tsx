@@ -6,11 +6,13 @@ import {DimensionName, findDimensionName} from 'enheter';
 import {findUnitFromUnitKeys} from '../../utils/unitUtils';
 import {UnitPrefixItem} from '../UnitPrefixItem';
 import {UnitItem} from '../UnitItem';
+import {UnitDimensionText} from '../../types/UnitDimensionText';
 
 export const createComboboxItem = (
   unitOrPrefixSearchResultItem: UnitOrPrefixSearchResultItem,
   unitTextFn: UnitTextFn,
-  unitPrefixTextFn: UnitPrefixTextFn
+  unitPrefixTextFn: UnitPrefixTextFn,
+  dimensionText: UnitDimensionText,
 ): ComboboxItem => {
   let label;
   let searchString = undefined;
@@ -24,7 +26,8 @@ export const createComboboxItem = (
     const unit = findUnitFromUnitKeys<DimensionName>(unitOrPrefixSearchResultItem.unit!);
     const prefixedUnit = unit.withPrefix(unitOrPrefixSearchResultItem.prefix);
     const {dimension, symbol} = prefixedUnit;
-    label = <UnitItem name={unitTextFn(prefixedUnit)} symbol={symbol} dimension={findDimensionName(dimension)!}/>;
+    const dimensionName = dimensionText[findDimensionName(dimension)!];
+    label = <UnitItem name={unitTextFn(prefixedUnit)} symbol={symbol} dimension={dimensionName}/>;
   }
   return {
     value: unitOrPrefixSearchResultItem.id(),

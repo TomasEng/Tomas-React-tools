@@ -5,6 +5,7 @@ import {unitPrefixKeywords} from '../../test-data/unitPrefixKeywords';
 import {unitTextFn} from '../../test-data/unitTextFn';
 import {unitPrefixTextFn} from '../../test-data/unitPrefixTextFn';
 import {allUnits} from 'enheter';
+import {unitDimensionText} from '../../test-data/unitDimensionText';
 
 const meta = {
   title: 'Components/UnitSearch',
@@ -26,6 +27,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Example: Story = {
   args: {
+    dimensionText: unitDimensionText,
     unitKeywords,
     prefixKeywords: unitPrefixKeywords,
     unitTextFn,

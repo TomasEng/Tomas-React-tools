@@ -4,6 +4,7 @@ import {unitTextFn} from '../../test-data/unitTextFn';
 import {unitPrefixTextFn} from '../../test-data/unitPrefixTextFn';
 import {unitKeywords} from '../../test-data/unitKeywords';
 import {unitPrefixKeywords} from '../../test-data/unitPrefixKeywords';
+import {unitDimensionText} from '../../test-data/unitDimensionText';
 
 const meta = {
   title: 'Components/UnitInput',
@@ -21,6 +22,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Example: Story = {
   args: {
+    dimensionText: unitDimensionText,
     unitPrefixTextFn,
     unitKeywords,
     unitTextFn,

@@ -113,6 +113,11 @@ describe('stringUtils', () => {
       expect(containsAllCharsInOrder('aBc', 'ABC')).toBe(true);
       expect(containsAllCharsInOrder('AbC', 'abc')).toBe(true);
     });
+
+    it('Returns true if the first parameter is empty', () => {
+      expect(containsAllCharsInOrder('', 'abc')).toBe(true);
+      expect(containsAllCharsInOrder('', '')).toBe(true);
+    });
   });
 
   describe('matchRatio', () => {

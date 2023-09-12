@@ -37,6 +37,7 @@ export const numberOfMatchingChars = (a: string, b: string) => {
  * Returns true if all characters in the search parameter are found in the data parameter in the same order.
  */
 export const containsAllCharsInOrder = (search: string, data: string): boolean => {
+  if (!search) return true;
   const searchLower = search.toLowerCase();
   const dataLower = data.toLowerCase();
   let searchIndex = 0;
