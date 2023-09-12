@@ -264,15 +264,45 @@
 }
 
 .Combobox_button__-JV4J {
-    height: 2.25rem;
     width: 100%;
 }
-body {
-    font-family: Inter, Arial, Helvetica, sans-serif;
+
+.Flag_root__MXDNb {
+    height: 1em;
+    box-shadow: #0006 0 0 .2em 0 inset;
+    border-radius: .1em;
 }
-.Combobox_stories_item__U-A3M {
-    display: inline-flex;
-    flex-direction: column;
+.other-flags_esperanto__0Y1zN {
+    background-image: url(../../415c1a9c34b1c9c683f5.svg);
 }
 
-/*# sourceMappingURL=components-Combobox-Combobox-stories.e9024c41.chunk.css.map*/
+.other-flags_esperanto__0Y1zN.other-flags_squared__eBYyy {
+    background-image: url(../../94298c5a6416af719056.svg);
+}
+
+.other-flags_ido__ycARF {
+    background-image: url(../../d640d224fb3e2ad8252f.svg);
+}
+
+.other-flags_ido__ycARF.other-flags_squared__eBYyy {
+    background-image: url(../../80928889a55f0c545a57.svg);
+}
+
+.other-flags_occitania__OPmiT {
+    background-image: url(../../750a1e0a03ab7ed7b715.svg);
+}
+
+.other-flags_sami__am4PU {
+    background-image: url(../../d0733f280003de395b9f.svg);
+}
+
+.other-flags_sami__am4PU.other-flags_squared__eBYyy {
+    background-image: url(../../66b0c3a71b4c114ad1b4.svg);
+}
+.LanguageItem_root__LrZF1 {
+    align-items: center;
+    display: inline-flex;
+    gap: 0.5rem;
+}
+
+/*# sourceMappingURL=components-LanguagePicker-LanguagePicker-stories.c8a75f49.chunk.css.map*/

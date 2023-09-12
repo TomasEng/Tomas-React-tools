@@ -264,45 +264,28 @@
 }
 
 .Combobox_button__-JV4J {
-    height: 2.25rem;
     width: 100%;
 }
-.Flag_root__MXDNb {
-    height: 1em;
-    box-shadow: #0006 0 0 .2em 0 inset;
-    border-radius: .1em;
-}
-.other-flags_esperanto__0Y1zN {
-    background-image: url(../../415c1a9c34b1c9c683f5.svg);
-}
 
-.other-flags_esperanto__0Y1zN.other-flags_squared__eBYyy {
-    background-image: url(../../94298c5a6416af719056.svg);
-}
-
-.other-flags_ido__ycARF {
-    background-image: url(../../d640d224fb3e2ad8252f.svg);
-}
-
-.other-flags_ido__ycARF.other-flags_squared__eBYyy {
-    background-image: url(../../80928889a55f0c545a57.svg);
-}
-
-.other-flags_occitania__OPmiT {
-    background-image: url(../../750a1e0a03ab7ed7b715.svg);
-}
-
-.other-flags_sami__am4PU {
-    background-image: url(../../d0733f280003de395b9f.svg);
-}
-
-.other-flags_sami__am4PU.other-flags_squared__eBYyy {
-    background-image: url(../../66b0c3a71b4c114ad1b4.svg);
-}
-.LanguageItem_root__LrZF1 {
-    align-items: center;
+.UnitItem_root__h076S {
     display: inline-flex;
-    gap: 0.5rem;
+    flex-direction: column;
+    text-align: left;
 }
 
-/*# sourceMappingURL=components-LanguagePicker-LanguagePicker-stories.c40315d7.chunk.css.map*/
+.UnitItem_unit__Ndkxa {
+    font-size: 1rem;
+}
+
+.UnitItem_dimension__b1NKZ {
+    font-size: 0.8rem;
+    color: #666;
+}
+.UnitSearch_selected__u0Zlc {
+    padding-left: 3px;
+    padding-right: 3px;
+    text-align: left;
+    width: 100%;
+}
+
+/*# sourceMappingURL=components-UnitSearch-UnitSearch-stories.e6b58419.chunk.css.map*/

@@ -264,28 +264,15 @@
 }
 
 .Combobox_button__-JV4J {
-    height: 2.25rem;
     width: 100%;
 }
-.UnitItem_root__h076S {
+
+body {
+    font-family: Inter, Arial, Helvetica, sans-serif;
+}
+.Combobox_stories_item__U-A3M {
     display: inline-flex;
     flex-direction: column;
-    text-align: left;
 }
 
-.UnitItem_unit__Ndkxa {
-    font-size: 1rem;
-}
-
-.UnitItem_dimension__b1NKZ {
-    font-size: 0.8rem;
-    color: #666;
-}
-.UnitSearch_selected__u0Zlc {
-    padding-left: 3px;
-    padding-right: 3px;
-    text-align: left;
-    width: 100%;
-}
-
-/*# sourceMappingURL=components-UnitSearch-UnitSearch-stories.3b7163c5.chunk.css.map*/
+/*# sourceMappingURL=components-Combobox-Combobox-stories.dc320c23.chunk.css.map*/
