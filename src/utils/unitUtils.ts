@@ -6,8 +6,9 @@ import {containsAllCharsInOrder} from './stringUtils';
 import {Prefix} from 'enheter/lib/Prefix';
 import {UnitOrPrefixSearchResultItem} from '../classes';
 import {orderByKeywords} from './sortUtils';
-import {compareLength, compareMatchingCharsInOrder} from './compareFunctions';
+import {compareLength} from './compareFunctions';
 import {buildCompareFunction} from './buildCompareFunction';
+import {compareMatchingCharsInOrder} from 'sort-functions';
 
 export const initializeUnit = (dimension: DimensionName, unit?: Unit) => {
   const validUnits = allUnits[dimension].units;
